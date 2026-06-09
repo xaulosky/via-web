@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vía Los Ángeles — Home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:        oklch(0.965 0.012 78);   /* crema cálida */
+    --paper-2:      oklch(0.945 0.016 75);   /* crema más profunda */
+    --ink:          oklch(0.255 0.018 55);   /* marrón-negro */
+    --ink-soft:     oklch(0.44 0.020 55);
+    --hair:         oklch(0.82 0.018 70);    /* hairlines */
+    --hair-soft:    oklch(0.88 0.014 72);
+    --accent:       oklch(0.555 0.115 42);   /* terracota */
+    --accent-deep:  oklch(0.46 0.10 40);
+    --gold:         oklch(0.66 0.075 70);    /* ocre suave */
+    --serif:'Cormorant Garamond', Georgia, serif;
+    --sans:'Archivo', system-ui, sans-serif;
+    --maxw:1200px;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--sans); -webkit-font-smoothing:antialiased; line-height:1.5;
+  }
+  img{ display:block; max-width:100%; }
+  a{ color:inherit; text-decoration:none; }
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
+
+  .kicker{ font-family:var(--sans); font-size:11px; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--accent); }
+  .serif{ font-family:var(--serif); }
+
+  /* ---------- UTILITY BAR ---------- */
+  .util{ border-bottom:1px solid var(--hair); background:var(--paper-2); }
+  .util .wrap{ display:flex; align-items:center; justify-content:space-between; height:38px; }
+  .util .date{ font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); }
+  .util .soc{ display:flex; gap:7px; align-items:center; }
+  .util .soc a[title]{ width:26px; height:26px; border:1px solid var(--hair); border-radius:50%; display:grid; place-items:center; font-size:12px; color:var(--ink-soft); transition:.18s; }
+  .util .soc a[title]:hover{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+  .util .search{ font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); display:flex; gap:6px; align-items:center; }
+
+  /* ---------- MASTHEAD ---------- */
+  .masthead{ text-align:center; padding:30px 0 18px; }
+  .masthead .mark{ font-family:var(--serif); font-weight:600; font-size:clamp(54px, 7vw, 74px); line-height:.82; letter-spacing:.01em; }
+  .masthead .mark em{ font-style:italic; color:var(--accent); }
+  .masthead .tag{ margin-top:10px; font-size:11px; letter-spacing:.42em; text-transform:uppercase; color:var(--ink-soft); }
+  .masthead .tag::before,.masthead .tag::after{ content:"—"; margin:0 12px; color:var(--hair); }
+
+  nav.main{ border-top:1px solid var(--ink); border-bottom:1px solid var(--ink); }
+  nav.main .wrap{ display:flex; justify-content:center; gap:0; flex-wrap:wrap; }
+  nav.main a{ font-size:12px; font-weight:500; letter-spacing:.14em; text-transform:uppercase; padding:14px 18px; color:var(--ink); position:relative; transition:color .18s; }
+  nav.main a + a::before{ content:""; position:absolute; left:0; top:50%; transform:translateY(-50%); width:1px; height:13px; background:var(--hair); }
+  nav.main a:hover{ color:var(--accent); }
+  nav.main a.cta{ color:var(--accent); font-weight:700; }
+
+  /* ---------- AD SLOTS ---------- */
+  .ad{ position:relative; border:1px solid var(--hair); background:
+        repeating-linear-gradient(135deg, transparent, transparent 13px, oklch(0.92 0.014 72) 13px, oklch(0.92 0.014 72) 14px),
+        var(--paper-2);
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; text-align:center; color:var(--ink-soft); }
+  .ad .lbl{ font-size:9px; letter-spacing:.28em; text-transform:uppercase; color:oklch(0.6 0.02 60); }
+  .ad .sz{ font-family:var(--serif); font-style:italic; font-size:20px; color:var(--ink); }
+  .ad::before{ content:"PUBLICIDAD"; position:absolute; top:8px; left:10px; font-size:8px; letter-spacing:.26em; color:oklch(0.66 0.02 60); }
+  .ad.leader{ height:104px; margin:22px 0 6px; }
+
+  /* ---------- HERO ---------- */
+  .hero{ display:grid; grid-template-columns:360px 1fr; gap:48px; padding:42px 0 12px; align-items:start; }
+
+  /* faux magazine cover */
+  .cover{ position:relative; box-shadow:0 2px 1px rgba(60,45,30,.04), 18px 22px 40px -22px rgba(60,40,25,.55); border:1px solid var(--hair); background:var(--ink); aspect-ratio:3/3.9; overflow:hidden; }
+  .cover .ph{ position:absolute; inset:0; }
+  .cover .ph img{ width:100%; height:100%; object-fit:cover; filter:saturate(1.02) contrast(1.02); }
+  .cover .scrim{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,14,8,.46) 0%, rgba(20,14,8,0) 26%, rgba(20,14,8,.06) 55%, rgba(20,14,8,.74) 100%); }
+  .cover .top{ position:absolute; top:0; left:0; right:0; padding:18px 20px 0; color:var(--paper); text-align:center; }
+  .cover .top .cmark{ font-family:var(--serif); font-weight:600; font-size:40px; line-height:.85; letter-spacing:.01em; }
+  .cover .top .cmark em{ font-style:italic; color:oklch(0.8 0.09 55); }
+  .cover .top .csub{ font-size:8.5px; letter-spacing:.42em; text-transform:uppercase; opacity:.92; margin-top:6px; }
+  .cover .iss{ position:absolute; top:16px; right:0; background:var(--accent); color:#fff; font-size:9px; letter-spacing:.18em; padding:5px 12px 5px 14px; font-weight:600; }
+  .cover .lines{ position:absolute; left:20px; right:20px; bottom:18px; color:var(--paper); }
+  .cover .lines .cl{ font-family:var(--serif); font-size:25px; line-height:1.04; font-weight:600; }
+  .cover .lines .cl em{ color:oklch(0.82 0.1 58); font-style:italic; }
+  .cover .lines .cl + .cl{ font-size:15px; font-weight:500; opacity:.9; margin-top:9px; padding-top:9px; border-top:1px solid rgba(255,255,255,.22); }
+  .cover-note{ margin-top:12px; font-size:10px; letter-spacing:.04em; color:var(--ink-soft); text-align:center; font-style:italic; font-family:var(--serif); }
+
+  .feature{ padding-top:6px; min-width:0; }
+  .feature .kicker{ display:inline-flex; gap:10px; align-items:center; }
+  .feature .kicker::after{ content:""; width:42px; height:1px; background:var(--accent); display:inline-block; }
+  .feature h1{ font-family:var(--serif); font-weight:600; font-size:clamp(48px, 6vw, 74px); line-height:.94; letter-spacing:-.01em; margin:14px 0 6px; }
+  .feature .dek{ font-family:var(--serif); font-style:italic; font-size:25px; line-height:1.2; color:var(--ink-soft); margin:0 0 18px; max-width:30ch; }
+  .feature .lede{ font-size:15px; color:var(--ink-soft); max-width:48ch; margin:0 0 24px; }
+  .feature .lede::first-letter{ }
+  .actions{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+  .btn{ font-family:var(--sans); font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; padding:14px 24px; border:1px solid var(--ink); display:inline-flex; gap:9px; align-items:center; transition:.18s; cursor:pointer; }
+  .btn.primary{ background:var(--accent); border-color:var(--accent); color:#fff; }
+  .btn.primary:hover{ background:var(--accent-deep); border-color:var(--accent-deep); }
+  .btn.ghost{ background:transparent; }
+  .btn.ghost:hover{ background:var(--ink); color:var(--paper); }
+
+  .also{ margin-top:34px; padding-top:22px; border-top:1px solid var(--hair); }
+  .also .lbl{ font-size:11px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:16px; }
+  .also-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px; }
+  .also-it{ display:grid; grid-template-columns:74px minmax(0,1fr); gap:13px; align-items:start; min-width:0; }
+  .also-it .th{ aspect-ratio:1/1; overflow:hidden; border:1px solid var(--hair); }
+  .also-it .th img{ width:100%; height:100%; object-fit:cover; }
+  .also-it .k{ font-size:9.5px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); }
+  .also-it h4{ font-family:var(--serif); font-weight:600; font-size:18px; line-height:1.08; margin:3px 0 0; }
+
+  /* ---------- SECTION HEADER ---------- */
+  .sec-head{ display:flex; align-items:baseline; gap:18px; margin:14px 0 26px; }
+  .sec-head h2{ font-family:var(--serif); font-weight:600; font-size:34px; margin:0; white-space:nowrap; }
+  .sec-head .rule{ flex:1; height:1px; background:var(--ink); align-self:center; }
+  .sec-head .more{ font-size:11px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); white-space:nowrap; }
+
+  /* ---------- MOSAIC ---------- */
+  section.edition{ padding:54px 0 10px; }
+  .mosaic{ display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:200px; gap:30px 30px; }
+  .art{ position:relative; display:flex; flex-direction:column; overflow:hidden; }
+  .art .img{ overflow:hidden; flex:1; border:1px solid var(--hair); background:var(--paper-2); }
+  .art .img img{ width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
+  .art:hover .img img{ transform:scale(1.045); }
+  .art .meta{ padding-top:13px; }
+  .art .k{ font-size:9.5px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); }
+  .art h3{ font-family:var(--serif); font-weight:600; line-height:1.04; margin:5px 0 0; }
+  .art p{ font-size:13px; color:var(--ink-soft); margin:6px 0 0; }
+
+  .art.feat{ grid-column:span 2; grid-row:span 2; }
+  .art.feat h3{ font-size:34px; }
+  .art.feat p{ font-size:14.5px; max-width:46ch; }
+  .art.tall{ grid-row:span 2; }
+  .art.wide{ grid-column:span 2; }
+  .art h3{ font-size:21px; }
+
+  .ad.tile{ grid-column:span 2; }
+  .ad.box{ grid-row:span 1; }
+
+  /* ---------- SPONSORS STRIP ---------- */
+  .sponsors{ padding:46px 0; margin-top:48px; border-top:1px solid var(--hair); border-bottom:1px solid var(--hair); background:var(--paper-2); }
+  .sponsors .lbl{ text-align:center; font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:24px; }
+  .sponsors .row{ display:grid; grid-template-columns:repeat(4,1fr); gap:24px; max-width:var(--maxw); margin:0 auto; padding:0 28px; }
+  .sponsors .ad.box{ height:120px; }
+
+  /* ---------- FOOTER ---------- */
+  footer.site{ background:var(--ink); color:oklch(0.86 0.014 72); padding:56px 0 34px; margin-top:60px; }
+  footer.site .top{ display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; padding-bottom:34px; border-bottom:1px solid oklch(0.4 0.02 55); }
+  footer.site .mark{ font-family:var(--serif); font-weight:600; font-size:44px; line-height:.85; color:var(--paper); }
+  footer.site .mark em{ font-style:italic; color:var(--gold); }
+  footer.site .tag{ font-size:11px; letter-spacing:.3em; text-transform:uppercase; color:oklch(0.7 0.02 60); margin-top:12px; }
+  footer.site h5{ font-size:11px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin:0 0 14px; }
+  footer.site ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:9px; }
+  footer.site ul a{ font-size:14px; color:oklch(0.82 0.014 72); }
+  footer.site ul a:hover{ color:var(--paper); }
+  footer.site .bottom{ display:flex; justify-content:space-between; align-items:center; padding-top:22px; font-size:11px; letter-spacing:.08em; color:oklch(0.66 0.02 60); flex-wrap:wrap; gap:10px; }
+  footer.site .fsoc{ display:flex; gap:9px; }
+  footer.site .fsoc a{ width:30px; height:30px; border:1px solid oklch(0.42 0.02 55); border-radius:50%; display:grid; place-items:center; font-size:13px; color:oklch(0.8 0.02 60); }
+  footer.site .fsoc a:hover{ background:var(--gold); color:var(--ink); border-color:var(--gold); }
+
+  @media(max-width:1040px){
+    .hero{ grid-template-columns:1fr; gap:30px; }
+    .cover{ max-width:340px; margin:0 auto; }
+  }
+  @media(max-width:920px){
+    .hero{ grid-template-columns:1fr; gap:30px; }
+    .cover{ max-width:340px; margin:0 auto; }
+    .feature h1{ font-size:56px; }
+    .masthead .mark{ font-size:54px; }
+    .mosaic{ grid-template-columns:repeat(2,1fr); }
+    .art.feat{ grid-column:span 2; }
+    .sponsors .row{ grid-template-columns:repeat(2,1fr); }
+    footer.site .top{ grid-template-columns:1fr 1fr; }
+  }
+  @media(max-width:560px){
+    .also-grid{ grid-template-columns:1fr; }
+    .mosaic{ grid-template-columns:1fr; }
+    .art.feat,.art.wide,.ad.tile{ grid-column:span 1; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- UTILITY BAR -->
+  <div class="util">
+    <div class="wrap">
+      <span class="date">Los Ángeles, Biobío · Jueves 4 de Junio, 2026</span>
+      <div class="soc">
+        <a href="Suscríbete.html" class="search" style="border:1px solid var(--accent);color:var(--accent);border-radius:20px;padding:5px 14px;">★ Suscríbete</a>
+        <span class="search">⌕ Buscar</span>
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Instagram">◎</a>
+        <a href="#" title="WhatsApp">✆</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MASTHEAD -->
+  <header class="masthead">
+    <div class="wrap">
+      <div class="mark serif">Ví<em>a</em></div>
+      <div class="tag">Una revista con identidad local</div>
+    </div>
+  </header>
+
+  <nav class="main">
+    <div class="wrap">
+      <a href="Artículo.html">En Portada</a>
+      <a href="#">En Escena</a>
+      <a href="Sección.html">Moda</a>
+      <a href="#">Salud</a>
+      <a href="#">Historia</a>
+      <a href="#">Sociedad</a>
+      <a href="Sección.html">Vía Explora</a>
+      <a href="#">Gastronomía</a>
+      <a href="Ediciones.html">Ediciones</a>
+      <a href="Anúnciate.html" class="cta">Anúnciate</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <!-- TOP LEADERBOARD AD -->
+    <div class="ad leader">
+      <span class="lbl">Espacio destacado</span>
+      <span class="sz">Banner cabecera · 970 × 120</span>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <div class="cover">
+          <div class="ph">
+            <img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/DSC09735-DxO_DeepPRIME-3-editada-e1778015451518-768x501.jpg" alt="Portada">
+          </div>
+          <div class="scrim"></div>
+          <div class="iss">Nº 21 · MAYO</div>
+          <div class="top">
+            <div class="cmark serif">Ví<em>a</em></div>
+            <div class="csub">Los Ángeles · Identidad Local</div>
+          </div>
+          <div class="lines">
+            <div class="cl serif">Lucca <em>Bakery</em></div>
+            <div class="cl serif">Moda Otoño-Invierno · Vía Explora: Huerquehue · Celebrando a mamá</div>
+          </div>
+        </div>
+        <div class="cover-note">↑ Portada del mes — reemplazable por el escaneo real de cada edición</div>
+      </div>
+
+      <div class="feature">
+        <span class="kicker">En portada · Edición de Mayo</span>
+        <h1 class="serif">Lucca Bakery</h1>
+        <p class="dek serif">Un emprendimiento familiar que conquista paladares</p>
+        <p class="lede">Detrás del mesón, una historia de oficio y herencia. Conversamos con la familia que transformó una receta de casa en el rincón dulce favorito de Los Ángeles, donde la masa madre y la paciencia mandan.</p>
+        <div class="actions">
+          <a class="btn primary" href="Ediciones.html">📖 Leer edición digital</a>
+          <a class="btn ghost" href="Ediciones.html">Ediciones anteriores</a>
+        </div>
+
+        <div class="also">
+          <div class="lbl">También en esta edición</div>
+          <div class="also-grid">
+            <a class="also-it" href="Artículo.html">
+              <div class="th"><img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/Agrupacion-Cultural-Perfiles-Siluetas.jpg" alt=""></div>
+              <div><div class="k">En Escena</div><h4 class="serif">El teatro vive en Los Ángeles</h4></div>
+            </a>
+            <a class="also-it" href="#">
+              <div class="th"><img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/MODA-1-e1778101333238.jpg" alt=""></div>
+              <div><div class="k">Moda</div><h4 class="serif">Elegancia relajada de invierno</h4></div>
+            </a>
+            <a class="also-it" href="#">
+              <div class="th"><img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/recorriendo-editada-3-768x817.jpg" alt=""></div>
+              <div><div class="k">Historia</div><h4 class="serif">U. de Concepción: 64 años</h4></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EN ESTA EDICIÓN -->
+    <section class="edition">
+      <div class="sec-head">
+        <h2 class="serif">En esta edición</h2>
+        <span class="rule"></span>
+        <a class="more" href="Sección.html">Ver todas las secciones →</a>
+      </div>
+
+      <div class="mosaic">
+        <a class="art feat" href="Artículo.html">
+          <div class="img"><img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/0743A034-B030-42F0-9E86-334C1B1F874C-4-768x1018.jpg" alt=""></div>
+          <div class="meta">
+            <div class="k">Vía Explora</div>
+            <h3 class="serif">Parque Nacional Huerquehue</h3>
+            <p>Un paisaje inolvidable en el sur de Chile: araucarias, lagunas de altura y senderos para perderse el fin de semana.</p>
+          </div>
+        </a>
+
+        <a class="art tall" href="#">
+          <div class="img"><img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/Grupal-1-e1777984252755-768x622.jpg" alt=""></div>
+          <div class="meta"><div class="k">Sociedad</div><h3 class="serif">Celebrando a mamá</h3></div>
+        </a>
+
+        <a class="art" href="#">
+          <div class="img"><img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/ODONTO-MAYO-768x533.jpg" alt=""></div>
+          <div class="meta"><div class="k">Salud</div><h3 class="serif">¿Las carillas son para todos?</h3></div>
+        </a>
+
+        <a class="art" href="#">
+          <div class="img"><img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/GASTRO-MAYO-final-2-768x537.jpg" alt=""></div>
+          <div class="meta"><div class="k">Gastronomía</div><h3 class="serif">Crema de repollo morado</h3></div>
+        </a>
+
+        <div class="ad tile box">
+          <span class="lbl">Espacio publicitario</span>
+          <span class="sz">Recuadro · 600 × 200</span>
+        </div>
+
+        <a class="art" href="#">
+          <div class="img"><img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/MODA-1-e1778101333238.jpg" alt=""></div>
+          <div class="meta"><div class="k">Moda</div><h3 class="serif">Otoño-Invierno 2026</h3></div>
+        </a>
+
+        <a class="art" href="#">
+          <div class="img"><img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/Francine-Ellena-Carolina-Sobarzo-y-Carolina-Vivallo-1-e1778116548443-768x550.jpg" alt=""></div>
+          <div class="meta"><div class="k">Sociales</div><h3 class="serif">Lanzamiento en Haras Santa Amelia</h3></div>
+        </a>
+
+        <a class="art wide" href="#">
+          <div class="img"><img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/Agrupacion-Cultural-Perfiles-Siluetas.jpg" alt=""></div>
+          <div class="meta"><div class="k">En Escena</div><h3 class="serif">El teatro vive en Los Ángeles</h3></div>
+        </a>
+      </div>
+
+      <!-- MID LEADERBOARD -->
+      <div class="ad leader" style="margin-top:40px;">
+        <span class="lbl">Espacio entre secciones</span>
+        <span class="sz">Banner · 970 × 90</span>
+      </div>
+    </section>
+  </div>
+
+  <!-- SPONSORS -->
+  <section class="sponsors">
+    <div class="lbl">Quienes hacen posible esta edición</div>
+    <div class="row">
+      <div class="ad box"><span class="sz">Auspiciador</span></div>
+      <div class="ad box"><span class="sz">Auspiciador</span></div>
+      <div class="ad box"><span class="sz">Auspiciador</span></div>
+      <div class="ad box"><span class="sz">Auspiciador</span></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site">
+    <div class="wrap">
+      <div class="top">
+        <div>
+          <div class="mark serif">Ví<em>a</em></div>
+          <div class="tag">Una revista con identidad local</div>
+          <p style="font-size:13.5px; max-width:38ch; margin:18px 0 0; color:oklch(0.78 0.014 72); line-height:1.6;">Revista mensual de Los Ángeles, Región del Biobío. Historias, gente y lugares que nos hacen comunidad.</p>
+        </div>
+        <div>
+          <h5>Secciones</h5>
+          <ul>
+            <li><a href="Artículo.html">En Portada</a></li>
+            <li><a href="Sección.html">Moda &amp; Tendencias</a></li>
+            <li><a href="#">Gastronomía</a></li>
+            <li><a href="Sección.html">Vía Explora</a></li>
+            <li><a href="#">Sociales</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Revista</h5>
+          <ul>
+            <li><a href="Suscríbete.html">Suscríbete</a></li>
+            <li><a href="Ediciones.html">Ediciones anteriores</a></li>
+            <li><a href="Anúnciate.html">Anúnciate con nosotros</a></li>
+            <li><a href="Contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="bottom">
+        <span>© 2026 Vía Producciones · Los Ángeles, Chile</span>
+        <div class="fsoc">
+          <a href="#" title="Facebook">f</a>
+          <a href="#" title="Instagram">◎</a>
+          <a href="#" title="WhatsApp">✆</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
