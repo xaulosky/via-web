@@ -4,5 +4,137 @@ const title = 'Suscríbete — Vía Los Ángeles';
 ---
 
 <Base title={title}>
-  <!-- Suscríbete content copied from Suscríbete.html -->
+  <div class="wrap">
+    <div class="crumbs">
+      <a href="/">Inicio</a><span class="sep">/</span>
+      <span>Suscríbete</span>
+    </div>
+
+    <div class="sec-intro">
+      <span class="kicker">Suscripción</span>
+      <h1 class="serif">Recibe <em>Vía</em> cada mes</h1>
+      <p>La revista que cuenta tu ciudad, en tu casa o en tu pantalla. Elige tu plan y no te pierdas ninguna edición.</p>
+    </div>
+
+    <div class="billing">
+      <div class="seg" id="seg">
+        <span class="slider" id="slider"></span>
+        <button class="on" data-cycle="monthly">Mensual</button>
+        <button data-cycle="annual">Anual<span class="save">Ahorra 2 meses</span></button>
+      </div>
+    </div>
+
+    <div class="plans" id="plans">
+      <div class="plan" data-plan="digital" data-name="Plan Digital" data-m="2990" data-a="29900">
+        <div class="tier">Digital</div>
+        <h3 class="serif">Vía Digital</h3>
+        <div class="desc">La edición completa, navegable desde cualquier dispositivo.</div>
+        <div class="price"><span class="amt">$2.990</span><span class="per">/ mes</span></div>
+        <ul>
+          <li>Edición digital cada mes</li>
+          <li>Acceso a ediciones anteriores</li>
+          <li>Lectura en celular, tablet y PC</li>
+        </ul>
+        <div class="pick"></div>
+      </div>
+
+      <div class="plan sel" data-plan="combo" data-name="Plan Combo" data-m="7990" data-a="79900">
+        <div class="ribbon">Más elegido</div>
+        <div class="tier">Impresa + Digital</div>
+        <h3 class="serif">Vía Combo</h3>
+        <div class="desc">Lo mejor de ambos mundos: papel en casa y acceso digital.</div>
+        <div class="price"><span class="amt">$7.990</span><span class="per">/ mes</span></div>
+        <ul>
+          <li>Revista impresa en tu domicilio</li>
+          <li>Edición digital incluida</li>
+          <li>Despacho mensual sin costo*</li>
+          <li>Invitaciones a eventos Vía</li>
+        </ul>
+        <div class="pick"></div>
+      </div>
+
+      <div class="plan" data-plan="impresa" data-name="Plan Impresa" data-m="5990" data-a="59900">
+        <div class="tier">Impresa</div>
+        <h3 class="serif">Vía Impresa</h3>
+        <div class="desc">La revista física, cada mes, en la puerta de tu casa.</div>
+        <div class="price"><span class="amt">$5.990</span><span class="per">/ mes</span></div>
+        <ul>
+          <li>Revista impresa en tu domicilio</li>
+          <li>Despacho mensual sin costo*</li>
+          <li>Edición coleccionable</li>
+        </ul>
+        <div class="pick"></div>
+      </div>
+    </div>
+    <div class="price-note">*Despacho sin costo en Los Ángeles. Otras comunas: valor a confirmar. Precios en CLP, referenciales — ajustables a tu tarifa real.</div>
+
+    <div class="checkout">
+      <form class="vform" id="subForm">
+        <div class="co-block">
+          <div class="step"><span class="n serif">1</span><h2 class="serif">Tus datos</h2></div>
+          <div class="two">
+            <div class="field"><label>Nombre</label><input type="text" required placeholder="Nombre"></div>
+            <div class="field"><label>Apellido</label><input type="text" required placeholder="Apellido"></div>
+          </div>
+          <div class="two">
+            <div class="field"><label>Correo electrónico</label><input type="email" required placeholder="tucorreo@ejemplo.cl"></div>
+            <div class="field"><label>Teléfono</label><input type="tel" required placeholder="+56 9 ..."></div>
+          </div>
+        </div>
+
+        <div class="co-block" id="shipBlock">
+          <div class="step"><span class="n serif">2</span><h2 class="serif">Dirección de despacho</h2></div>
+          <div class="field"><label>Dirección</label><input type="text" placeholder="Calle y número"></div>
+          <div class="three">
+            <div class="field"><label>Depto / casa</label><input type="text" placeholder="(opcional)"></div>
+            <div class="field"><label>Comuna</label><input type="text" placeholder="Los Ángeles"></div>
+            <div class="field"><label>Región</label>
+              <select><option>Biobío</option><option>Ñuble</option><option>Araucanía</option><option>Maule</option><option>Metropolitana</option><option>Otra</option></select>
+            </div>
+          </div>
+        </div>
+
+        <div class="co-block">
+          <div class="step"><span class="n serif" id="payNum">3</span><h2 class="serif">Pago</h2></div>
+          <div class="pay">
+            <label class="opt"><input type="radio" name="pay" checked> <b>Webpay</b> · tarjeta de crédito o débito</label>
+            <label class="opt"><input type="radio" name="pay"> <b>Transferencia bancaria</b> · te enviamos los datos</label>
+            <label class="opt"><input type="radio" name="pay"> <b>Mercado Pago</b></label>
+          </div>
+        </div>
+      </form>
+
+      <!-- SUMMARY -->
+      <aside class="summary">
+        <div class="hd">Resumen de tu suscripción</div>
+        <div class="bd">
+          <div class="cover-mini">
+            <img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/DSC09735-DxO_DeepPRIME-3-editada-e1778015451518-768x501.jpg" alt="">
+            <div class="sc"></div>
+            <div class="cm serif">Ví<em>a</em></div>
+          </div>
+          <div class="row plan-row"><span class="pn serif" id="sumName">Plan Combo</span></div>
+          <div class="row"><span>Modalidad</span><b id="sumCycle">Mensual</b></div>
+          <div class="row"><span>Entrega</span><b id="sumDelivery">Impresa + Digital</b></div>
+          <div class="row" id="rowSave" style="display:none;"><span>Ahorro anual</span><b id="sumSave" style="color:var(--accent);">—</b></div>
+          <div class="total">
+            <span class="lbl">Total</span>
+            <span class="amt serif" id="sumTotal">$7.990 <small id="sumPer">/ mes</small></span>
+          </div>
+          <button class="btn primary" type="submit" form="subForm" id="payBtn">Ir a pagar</button>
+          <div class="fine">Puedes pausar o cancelar cuando quieras. Sin permanencia.</div>
+        </div>
+      </aside>
+    </div>
+
+    <section style="padding-top:70px;">
+      <div class="sec-head"><h2 class="serif">Por qué suscribirte</h2><span class="rule"></span></div>
+      <div class="benefits">
+        <div class="ben"><div class="ic">✦</div><h4 class="serif">Antes que nadie</h4><p>Recíbela apenas sale, sin depender de los puntos de distribución.</p></div>
+        <div class="ben"><div class="ic">⌂</div><h4 class="serif">En tu casa</h4><p>Despacho mensual a domicilio para los planes con revista impresa.</p></div>
+        <div class="ben"><div class="ic">◷</div><h4 class="serif">Archivo completo</h4><p>Acceso a todas las ediciones digitales, cuando quieras leerlas.</p></div>
+        <div class="ben"><div class="ic">♥</div><h4 class="serif">Apoyas lo local</h4><p>Cada suscripción sostiene el periodismo con identidad de tu ciudad.</p></div>
+      </div>
+    </section>
+  </div>
 </Base>

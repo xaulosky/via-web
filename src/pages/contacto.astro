@@ -4,5 +4,72 @@ const title = 'Contacto — Vía Los Ángeles';
 ---
 
 <Base title={title}>
-  <!-- Page content copied from Contacto.html -->
+  <div class="wrap">
+    <div class="crumbs">
+      <a href="/">Inicio</a><span class="sep">/</span>
+      <span>Contacto</span>
+    </div>
+
+    <div class="sec-intro">
+      <span class="kicker">Contacto</span>
+      <h1 class="serif">Hablemos</h1>
+      <p>¿Tienes una historia que contar, una consulta o una sugerencia? Escríbenos: leemos cada mensaje.</p>
+    </div>
+
+    <div class="c-layout">
+      <!-- FORM -->
+      <form class="vform" id="contactForm">
+        <div class="ok" id="okMsg">¡Gracias! Tu mensaje fue enviado. Te responderemos a la brevedad.</div>
+        <div class="two">
+          <div class="field"><label>Nombre</label><input type="text" required placeholder="Tu nombre"></div>
+          <div class="field"><label>Correo electrónico</label><input type="email" required placeholder="tucorreo@ejemplo.cl"></div>
+        </div>
+        <div class="two">
+          <div class="field"><label>Teléfono (opcional)</label><input type="tel" placeholder="+56 9 ..."></div>
+          <div class="field">
+            <label>Motivo</label>
+            <select>
+              <option>Consulta general</option>
+              <option>Sugerir una historia</option>
+              <option>Publicidad / Anúnciate</option>
+              <option>Suscripciones</option>
+              <option>Prensa y colaboraciones</option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label>Mensaje</label><textarea required placeholder="Cuéntanos en qué podemos ayudarte..."></textarea></div>
+        <button class="btn primary" type="submit">Enviar mensaje</button>
+        <div class="form-note">También puedes escribirnos directo por <a href="https://wa.me/56973353108" style="color:var(--accent); border-bottom:1px solid var(--accent);">WhatsApp</a>.</div>
+      </form>
+
+      <!-- INFO -->
+      <div>
+        <div class="c-info">
+          <div class="ci">
+            <span class="ic">✎</span>
+            <div><div class="l">Redacción</div><div class="v"><a href="#">[email protected]</a></div><div class="sub">Historias, prensa y colaboraciones</div></div>
+          </div>
+          <div class="ci">
+            <span class="ic">✆</span>
+            <div><div class="l">WhatsApp / Teléfono</div><div class="v"><a href="https://wa.me/56973353108">+56 9 7335 3108</a></div><div class="sub">Lun a Vie · 9:00 – 18:00</div></div>
+          </div>
+          <div class="ci">
+            <span class="ic">⌂</span>
+            <div><div class="l">Dónde estamos</div><div class="v">Los Ángeles, Región del Biobío</div><div class="sub">Dirección de oficina — por confirmar</div></div>
+          </div>
+          <div class="ci">
+            <span class="ic">◎</span>
+            <div><div class="l">Síguenos</div><div class="v">@revista.via.losangeles</div><div class="sub">Instagram · Facebook · WhatsApp</div></div>
+          </div>
+        </div>
+
+        <div class="map">
+          <div style="text-align:center;">
+            <div class="pin serif">◍ Los Ángeles, Chile</div>
+            <div style="margin-top:6px;">mapa interactivo (placeholder)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </Base>
