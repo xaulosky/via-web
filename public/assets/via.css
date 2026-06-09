@@ -17,6 +17,7 @@
 *{ box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
 body{ margin:0; background:var(--paper); color:var(--ink); font-family:var(--sans); -webkit-font-smoothing:antialiased; line-height:1.5; }
+body{ overflow-x:hidden; }
 img{ display:block; max-width:100%; }
 a{ color:inherit; text-decoration:none; }
 .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
@@ -449,3 +450,85 @@ aside.rail .ad.box{ height:600px; }
 .price-note{ text-align:center; font-size:10px; letter-spacing:.1em; color:oklch(0.62 0.02 60); margin-top:18px; }
 @media(max-width:920px){ .plans{ grid-template-columns:1fr; } .checkout{ grid-template-columns:1fr; gap:38px; } .summary{ position:static; } .benefits{ grid-template-columns:1fr 1fr; } }
 @media(max-width:560px){ .vform .two,.vform .three{ grid-template-columns:1fr; } .benefits{ grid-template-columns:1fr; } }
+
+@media(max-width:720px){
+  .wrap{ padding:0 16px; }
+
+  .util .wrap{
+    height:auto;
+    padding-top:10px;
+    padding-bottom:10px;
+    gap:10px;
+    flex-direction:column;
+    align-items:flex-start;
+  }
+  .util .date{ font-size:10px; letter-spacing:.08em; }
+  .util .soc{ width:100%; overflow-x:auto; white-space:nowrap; padding-bottom:4px; }
+
+  .masthead{ padding:18px 0 12px; }
+  .masthead .mark{ font-size:46px; }
+  .masthead .tag{ margin-top:8px; letter-spacing:.28em; }
+
+  nav.main{ position:sticky; top:0; z-index:20; background:var(--paper); }
+  nav.main .wrap{ justify-content:flex-start; overflow-x:auto; -webkit-overflow-scrolling:touch; padding:0 12px; gap:2px; scroll-snap-type:x proximity; }
+  nav.main a{ padding:12px 14px; scroll-snap-align:start; flex:0 0 auto; font-size:11px; }
+
+  .sec-head h2{ font-size:26px; }
+  .sec-intro{ padding:28px 0 18px; }
+  .sec-intro h1{ font-size:clamp(34px,10vw,52px); }
+  .sec-intro p{ font-size:18px; }
+
+  .article-head{ padding:24px 0 20px; }
+  .article-head h1{ font-size:clamp(34px,10vw,48px); }
+  .article-head .dek{ font-size:19px; }
+  .article-body{ gap:32px; }
+  .prose > p{ font-size:18px; }
+  .prose h2{ font-size:26px; }
+  .lead-img img{ height:auto; aspect-ratio:4/3; }
+
+  .feature h1{ font-size:clamp(40px,12vw,56px); }
+  .feature .dek{ font-size:21px; }
+  .feature .lede{ font-size:14px; }
+
+  .pitch{ padding-top:28px; }
+  .pitch h1{ font-size:clamp(40px,12vw,56px); }
+  .pitch p.dek{ font-size:20px; }
+
+  .current .info h2{ font-size:42px; }
+
+  .checkout,.c-layout,.layout,.article-body{ gap:32px; }
+  .plans,.benefits,.feed-grid,.rel-grid,.arch,.mosaic,.value,.formats,.dist,.stats{ grid-template-columns:1fr; }
+
+  .sponsors .row{ grid-template-columns:1fr; padding:0 16px; }
+  footer.site{ padding:42px 0 28px; }
+  footer.site .top{ grid-template-columns:1fr; gap:28px; }
+  footer.site .bottom{ flex-direction:column; align-items:flex-start; gap:12px; }
+
+  .actions{ flex-direction:column; align-items:stretch; }
+  .btn{ width:100%; justify-content:center; }
+  .also-grid{ grid-template-columns:1fr; }
+  .also-it{ grid-template-columns:72px 1fr; }
+  .current{ grid-template-columns:1fr; }
+  .current .vcover{ max-width:none; }
+  .current .actions{ flex-direction:column; }
+  .current .toc{ gap:8px 16px; }
+
+  .rail-card,.summary{ min-width:0; }
+  aside.rail .ad.box{ height:180px; min-width:0; }
+}
+
+@media(max-width:480px){
+  .wrap{ padding:0 14px; }
+  .util .soc a[title], .util .soc a.search{ flex:none; }
+  .masthead .mark{ font-size:40px; }
+  .masthead .tag{ font-size:10px; letter-spacing:.22em; }
+  .cover-note{ font-size:9px; }
+  .tags a{ width:100%; text-align:center; }
+  .share{ flex-wrap:wrap; }
+  .share a{ width:32px; height:32px; }
+  .current .info .nº{ font-size:18px; }
+  .current .toc{ gap:8px 12px; }
+  .summary .bd{ padding:18px; }
+  .summary .total .amt{ font-size:30px; }
+  .contact .grid{ padding:0 14px; }
+}
