@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vía Explora — Vía Los Ángeles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/via.css">
+<style>
+  /* placeholder image */
+  .ph{ background:
+        repeating-linear-gradient(135deg, transparent, transparent 11px, oklch(0.91 0.014 72) 11px, oklch(0.91 0.014 72) 12px),
+        var(--paper-2);
+      display:grid; place-items:center; color:oklch(0.6 0.02 60);
+      font-size:10px; letter-spacing:.22em; text-transform:uppercase; }
+
+  .sec-intro{ text-align:center; max-width:760px; margin:0 auto; padding:36px 0 30px; }
+  .sec-intro .kicker{ display:inline-flex; gap:12px; align-items:center; }
+  .sec-intro .kicker::before,.sec-intro .kicker::after{ content:""; width:40px; height:1px; background:var(--accent); }
+  .sec-intro h1{ font-family:var(--serif); font-weight:600; font-size:clamp(48px,6vw,76px); line-height:.95; margin:14px 0 14px; }
+  .sec-intro p{ font-family:var(--serif); font-style:italic; font-size:22px; line-height:1.34; color:var(--ink-soft); margin:0 auto; max-width:48ch; }
+
+  .layout{ display:grid; grid-template-columns:1fr 300px; gap:56px; padding:30px 0 0; align-items:start; }
+  .feed{ min-width:0; }
+
+  /* featured */
+  .lede-story{ display:grid; grid-template-columns:1.25fr 1fr; gap:34px; align-items:center; padding-bottom:40px; margin-bottom:40px; border-bottom:1px solid var(--hair); }
+  .lede-story .img{ aspect-ratio:4/3; overflow:hidden; border:1px solid var(--hair); }
+  .lede-story .img img{ width:100%; height:100%; object-fit:cover; }
+  .lede-story h2{ font-family:var(--serif); font-weight:600; font-size:clamp(30px,3.6vw,44px); line-height:1.02; margin:10px 0 12px; }
+  .lede-story p{ font-size:15px; color:var(--ink-soft); line-height:1.6; margin:0 0 20px; max-width:42ch; }
+  .lede-story .meta{ font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); margin-top:14px; }
+
+  .feed-grid{ display:grid; grid-template-columns:1fr 1fr; gap:34px 34px; }
+  .post{ display:flex; flex-direction:column; }
+  .post .img,.post .ph{ aspect-ratio:3/2; overflow:hidden; border:1px solid var(--hair); }
+  .post .img img{ width:100%; height:100%; object-fit:cover; transition:transform .5s; }
+  .post:hover .img img{ transform:scale(1.045); }
+  .post .k{ font-size:9.5px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); margin-top:14px; }
+  .post h3{ font-family:var(--serif); font-weight:600; font-size:25px; line-height:1.04; margin:5px 0 8px; }
+  .post p{ font-size:13.5px; color:var(--ink-soft); line-height:1.55; margin:0; }
+  .post .meta{ font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); margin-top:10px; }
+
+  .pager{ display:flex; justify-content:center; gap:8px; align-items:center; margin:48px 0 0; }
+  .pager a{ min-width:40px; height:40px; padding:0 12px; border:1px solid var(--hair); display:grid; place-items:center; font-size:13px; letter-spacing:.05em; color:var(--ink); transition:.18s; }
+  .pager a:hover{ border-color:var(--accent); color:var(--accent); }
+  .pager a.on{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+
+  aside.rail{ position:sticky; top:74px; display:flex; flex-direction:column; gap:22px; }
+  aside.rail .ad.box{ height:600px; }
+  .rail-card{ border:1px solid var(--hair); padding:18px; }
+  .rail-card .lbl{ font-size:11px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-soft); padding-bottom:14px; border-bottom:1px solid var(--hair); margin-bottom:6px; }
+  .rail-it{ display:grid; grid-template-columns:54px 1fr; gap:12px; padding:13px 0; border-bottom:1px solid var(--hair-soft); align-items:center; }
+  .rail-it:last-child{ border-bottom:0; }
+  .rail-it .n{ font-family:var(--serif); font-size:30px; font-style:italic; color:var(--accent); line-height:1; text-align:center; }
+  .rail-it h4{ font-family:var(--serif); font-weight:600; font-size:16px; line-height:1.1; margin:0; }
+
+  @media(max-width:920px){
+    .layout{ grid-template-columns:1fr; gap:0; }
+    aside.rail{ position:static; flex-direction:row; flex-wrap:wrap; margin-top:44px; }
+    aside.rail .ad.box{ height:250px; flex:1; min-width:260px; }
+    .rail-card{ flex:1; min-width:260px; }
+    .lede-story{ grid-template-columns:1fr; }
+  }
+  @media(max-width:560px){ .feed-grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body data-screen-label="Sección">
+
+  <div class="util">
+    <div class="wrap">
+      <span class="date">Los Ángeles, Biobío · Edición de Mayo 2026</span>
+      <div class="soc">
+        <a href="Suscríbete.html" class="search" style="border:1px solid var(--accent);color:var(--accent);border-radius:20px;padding:5px 14px;">★ Suscríbete</a><span class="search">⌕ Buscar</span>
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Instagram">◎</a>
+        <a href="#" title="WhatsApp">✆</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="masthead">
+    <div class="wrap">
+      <a href="Home Hi-Fi.html"><div class="mark serif">Ví<em>a</em></div></a>
+      <div class="tag">Una revista con identidad local</div>
+    </div>
+  </header>
+
+  <nav class="main">
+    <div class="wrap">
+      <a href="#">En Portada</a>
+      <a href="#">En Escena</a>
+      <a href="#">Moda</a>
+      <a href="#">Salud</a>
+      <a href="#">Historia</a>
+      <a href="#">Sociedad</a>
+      <a href="#" class="on">Vía Explora</a>
+      <a href="#">Gastronomía</a>
+      <a href="Ediciones.html">Ediciones</a>
+      <a href="Anúnciate.html" class="cta">Anúnciate</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <div class="crumbs">
+      <a href="Home Hi-Fi.html">Inicio</a><span class="sep">/</span>
+      <span>Vía Explora</span>
+    </div>
+
+    <div class="sec-intro">
+      <span class="kicker">Sección</span>
+      <h1 class="serif">Vía Explora</h1>
+      <p>Rutas, paisajes y escapadas para descubrir el sur de Chile y los rincones que rodean Los Ángeles.</p>
+    </div>
+
+    <div class="layout">
+      <div class="feed">
+        <!-- featured -->
+        <article class="lede-story">
+          <a class="img" href="Artículo.html"><img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/0743A034-B030-42F0-9E86-334C1B1F874C-4-768x1018.jpg" alt=""></a>
+          <div>
+            <span class="kicker">Reportaje del mes</span>
+            <h2 class="serif"><a href="Artículo.html">Parque Nacional Huerquehue</a></h2>
+            <p>Araucarias milenarias, lagunas de altura y senderos que premian cada paso. Una guía para vivir el parque en un fin de semana.</p>
+            <a class="btn ghost sm" href="Artículo.html">Leer reportaje</a>
+            <div class="meta">Mayo 2026 · 8 min</div>
+          </div>
+        </article>
+
+        <!-- grid -->
+        <div class="feed-grid">
+          <a class="post" href="#">
+            <div class="ph">foto reportaje · 3:2</div>
+            <div class="k">Naturaleza</div><h3 class="serif">Saltos del Laja en otoño</h3>
+            <p>El monumento natural más visitado de la zona se viste de cobre con la caída de las hojas.</p>
+            <div class="meta">Abril 2026</div>
+          </a>
+          <a class="post" href="#">
+            <div class="ph">foto reportaje · 3:2</div>
+            <div class="k">Montaña</div><h3 class="serif">Nevados de Chillán</h3>
+            <p>Termas, bosque nativo y nieve temprana a pocas horas de Los Ángeles.</p>
+            <div class="meta">Abril 2026</div>
+          </a>
+          <a class="post" href="#">
+            <div class="ph">foto reportaje · 3:2</div>
+            <div class="k">Ruta</div><h3 class="serif">Alto Biobío, entre ríos</h3>
+            <p>Un recorrido por comunidades pewenche y paisajes de cordillera.</p>
+            <div class="meta">Marzo 2026</div>
+          </a>
+          <a class="post" href="#">
+            <div class="ph">foto reportaje · 3:2</div>
+            <div class="k">Lagos</div><h3 class="serif">Laguna del Laja</h3>
+            <p>El volcán Antuco como telón de fondo de un día de pesca y silencio.</p>
+            <div class="meta">Marzo 2026</div>
+          </a>
+          <a class="post" href="#">
+            <div class="ph">foto reportaje · 3:2</div>
+            <div class="k">Escapada</div><h3 class="serif">Mininco y sus bosques</h3>
+            <p>Cicletadas, picnic y aire fresco para el panorama familiar del finde.</p>
+            <div class="meta">Febrero 2026</div>
+          </a>
+          <a class="post" href="#">
+            <div class="ph">foto reportaje · 3:2</div>
+            <div class="k">Costa</div><h3 class="serif">Del valle al mar: Lebu</h3>
+            <p>Tres horas hacia el Pacífico para cambiar de paisaje sin cambiar de región.</p>
+            <div class="meta">Febrero 2026</div>
+          </a>
+        </div>
+
+        <div class="pager">
+          <a href="#" class="on">1</a>
+          <a href="#">2</a>
+          <a href="#">3</a>
+          <a href="#">Siguiente →</a>
+        </div>
+      </div>
+
+      <aside class="rail">
+        <div class="ad box">
+          <span class="lbl">Espacio publicitario</span>
+          <span class="sz">Rascacielos · 300 × 600</span>
+        </div>
+        <div class="rail-card">
+          <div class="lbl">Lo más leído</div>
+          <a class="rail-it" href="Artículo.html"><div class="n serif">1</div><h4 class="serif">Lucca Bakery: el dulce favorito de la ciudad</h4></a>
+          <a class="rail-it" href="#"><div class="n serif">2</div><h4 class="serif">U. de Concepción: 64 años de trayectoria</h4></a>
+          <a class="rail-it" href="#"><div class="n serif">3</div><h4 class="serif">Otoño-Invierno: elegancia relajada</h4></a>
+          <a class="rail-it" href="#"><div class="n serif">4</div><h4 class="serif">Celebrando a mamá</h4></a>
+        </div>
+        <div class="ad box" style="height:250px;">
+          <span class="lbl">Espacio publicitario</span>
+          <span class="sz">Recuadro · 300 × 250</span>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <section class="sponsors">
+    <div class="lbl">Quienes hacen posible esta edición</div>
+    <div class="row">
+      <div class="ad box"><span class="sz">Auspiciador</span></div>
+      <div class="ad box"><span class="sz">Auspiciador</span></div>
+      <div class="ad box"><span class="sz">Auspiciador</span></div>
+      <div class="ad box"><span class="sz">Auspiciador</span></div>
+    </div>
+  </section>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="top">
+        <div>
+          <div class="mark serif">Ví<em>a</em></div>
+          <div class="tag">Una revista con identidad local</div>
+          <p style="font-size:13.5px; max-width:38ch; margin:18px 0 0; color:oklch(0.78 0.014 72); line-height:1.6;">Revista mensual de Los Ángeles, Región del Biobío. Historias, gente y lugares que nos hacen comunidad.</p>
+        </div>
+        <div>
+          <h5>Secciones</h5>
+          <ul>
+            <li><a href="#">En Portada</a></li>
+            <li><a href="#">Moda &amp; Tendencias</a></li>
+            <li><a href="#">Gastronomía</a></li>
+            <li><a href="#">Vía Explora</a></li>
+            <li><a href="#">Sociales</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Revista</h5>
+          <ul>
+            <li><a href="Suscríbete.html">Suscríbete</a></li>
+            <li><a href="Ediciones.html">Ediciones anteriores</a></li>
+            <li><a href="Anúnciate.html">Anúnciate con nosotros</a></li>
+            <li><a href="Contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="bottom">
+        <span>© 2026 Vía Producciones · Los Ángeles, Chile</span>
+        <div class="fsoc">
+          <a href="#" title="Facebook">f</a>
+          <a href="#" title="Instagram">◎</a>
+          <a href="#" title="WhatsApp">✆</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

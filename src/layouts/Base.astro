@@ -1,0 +1,97 @@
+---
+const { title = 'Vía Los Ángeles' } = Astro.props;
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/via.css">
+  </head>
+  <body>
+    <!-- UTILITY BAR -->
+    <div class="util">
+      <div class="wrap">
+        <span class="date">Los Ángeles, Biobío · Jueves 4 de Junio, 2026</span>
+        <div class="soc">
+          <a href="/suscribete" class="search suscribe-pill">★ Suscríbete</a>
+          <span class="search">⌕ Buscar</span>
+          <a href="#" title="Facebook">f</a>
+          <a href="#" title="Instagram">◎</a>
+          <a href="#" title="WhatsApp">✆</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- MASTHEAD -->
+    <header class="masthead">
+      <div class="wrap">
+        <div class="mark serif">Ví<em>a</em></div>
+        <div class="tag">Una revista con identidad local</div>
+      </div>
+    </header>
+
+    <nav class="main">
+      <div class="wrap">
+        <a href="/articulo">En Portada</a>
+        <a href="#">En Escena</a>
+        <a href="/seccion">Moda</a>
+        <a href="#">Salud</a>
+        <a href="#">Historia</a>
+        <a href="#">Sociedad</a>
+        <a href="/seccion">Vía Explora</a>
+        <a href="#">Gastronomía</a>
+        <a href="/ediciones">Ediciones</a>
+        <a href="/anunciate" class="cta">Anúnciate</a>
+      </div>
+    </nav>
+
+    <main>
+      <slot />
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="site">
+      <div class="wrap">
+        <div class="top">
+          <div>
+            <div class="mark serif">Ví<em>a</em></div>
+            <div class="tag">Una revista con identidad local</div>
+            <p class="footer-desc">Revista mensual de Los Ángeles, Región del Biobío. Historias, gente y lugares que nos hacen comunidad.</p>
+          </div>
+          <div>
+            <h5>Secciones</h5>
+            <ul>
+              <li><a href="/articulo">En Portada</a></li>
+              <li><a href="/seccion">Moda &amp; Tendencias</a></li>
+              <li><a href="#">Gastronomía</a></li>
+              <li><a href="/seccion">Vía Explora</a></li>
+              <li><a href="#">Sociales</a></li>
+            </ul>
+          </div>
+          <div>
+            <h5>Revista</h5>
+            <ul>
+              <li><a href="/suscribete">Suscríbete</a></li>
+              <li><a href="/ediciones">Ediciones anteriores</a></li>
+              <li><a href="/anunciate">Anúnciate con nosotros</a></li>
+              <li><a href="/contacto">Contacto</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="bottom">
+          <span>© 2026 Vía Producciones · Los Ángeles, Chile</span>
+          <div class="fsoc">
+            <a href="#" title="Facebook">f</a>
+            <a href="#" title="Instagram">◎</a>
+            <a href="#" title="WhatsApp">✆</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

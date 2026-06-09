@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suscríbete — Vía Los Ángeles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/via.css">
+<style>
+  .sec-intro{ text-align:center; max-width:760px; margin:0 auto; padding:36px 0 24px; }
+  .sec-intro .kicker{ display:inline-flex; gap:12px; align-items:center; }
+  .sec-intro .kicker::before,.sec-intro .kicker::after{ content:""; width:40px; height:1px; background:var(--accent); }
+  .sec-intro h1{ font-family:var(--serif); font-weight:600; font-size:clamp(48px,6vw,78px); line-height:.95; margin:14px 0 14px; }
+  .sec-intro h1 em{ font-style:italic; color:var(--accent); }
+  .sec-intro p{ font-family:var(--serif); font-style:italic; font-size:22px; line-height:1.34; color:var(--ink-soft); margin:0 auto; max-width:48ch; }
+
+  /* billing toggle */
+  .billing{ display:flex; justify-content:center; margin:10px 0 36px; }
+  .seg{ display:inline-flex; border:1px solid var(--ink); position:relative; background:var(--paper); }
+  .seg button{ font-family:var(--sans); font-size:12px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; padding:13px 26px; border:0; background:transparent; color:var(--ink); cursor:pointer; position:relative; z-index:2; transition:color .2s; }
+  .seg button.on{ color:var(--paper); }
+  .seg .slider{ position:absolute; top:0; bottom:0; left:0; width:50%; background:var(--ink); transition:transform .25s ease; z-index:1; }
+  .seg .save{ font-size:9px; letter-spacing:.1em; color:var(--accent); display:block; margin-top:2px; text-transform:none; font-weight:700; }
+  .seg button.on .save{ color:var(--gold); }
+
+  /* plans */
+  .plans{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  .plan{ border:1px solid var(--hair); padding:30px 26px 28px; display:flex; flex-direction:column; background:var(--paper); cursor:pointer; transition:border-color .18s, box-shadow .18s, transform .18s; position:relative; }
+  .plan:hover{ border-color:var(--ink-soft); }
+  .plan.sel{ border-color:var(--ink); box-shadow:10px 12px 0 oklch(0.555 0.115 42 / .14); }
+  .plan .ribbon{ position:absolute; top:-1px; right:-1px; background:var(--accent); color:#fff; font-size:9px; letter-spacing:.16em; text-transform:uppercase; padding:5px 12px; font-weight:600; }
+  .plan .tier{ font-size:11px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--accent); }
+  .plan h3{ font-family:var(--serif); font-weight:600; font-size:30px; margin:8px 0 6px; }
+  .plan .desc{ font-size:13px; color:var(--ink-soft); line-height:1.5; min-height:38px; margin-bottom:14px; }
+  .plan .price{ display:flex; align-items:baseline; gap:6px; padding-bottom:16px; margin-bottom:16px; border-bottom:1px solid var(--hair); }
+  .plan .price .amt{ font-family:var(--serif); font-weight:600; font-size:42px; line-height:1; }
+  .plan .price .per{ font-size:12px; color:var(--ink-soft); letter-spacing:.05em; }
+  .plan ul{ list-style:none; margin:0 0 22px; padding:0; display:flex; flex-direction:column; gap:10px; flex:1; }
+  .plan ul li{ font-size:13.5px; color:oklch(0.34 0.018 55); padding-left:22px; position:relative; line-height:1.4; }
+  .plan ul li::before{ content:"✦"; position:absolute; left:0; color:var(--accent); font-size:11px; top:2px; }
+  .plan .pick{ font-family:var(--sans); font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; padding:13px; border:1px solid var(--ink); text-align:center; transition:.18s; }
+  .plan.sel .pick{ background:var(--accent); border-color:var(--accent); color:#fff; }
+  .plan:not(.sel) .pick::before{ content:"Elegir plan"; }
+  .plan.sel .pick::before{ content:"✓ Plan seleccionado"; }
+
+  /* checkout */
+  .checkout{ display:grid; grid-template-columns:1.3fr .7fr; gap:50px; padding:64px 0 0; align-items:start; }
+  .co-block{ margin-bottom:34px; }
+  .co-block .step{ display:flex; align-items:center; gap:13px; margin-bottom:20px; }
+  .co-block .step .n{ width:30px; height:30px; border:1px solid var(--ink); border-radius:50%; display:grid; place-items:center; font-family:var(--serif); font-size:17px; font-style:italic; }
+  .co-block .step h2{ font-family:var(--serif); font-weight:600; font-size:27px; margin:0; }
+  .vform .field{ margin-bottom:18px; }
+  .vform .two{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .vform .three{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+  .vform label{ display:block; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-soft); margin:0 0 8px; }
+  .vform input,.vform select{ width:100%; background:var(--paper); border:1px solid var(--hair); color:var(--ink); padding:13px 14px; font-family:var(--sans); font-size:14.5px; transition:border-color .18s; }
+  .vform input:focus,.vform select:focus{ outline:none; border-color:var(--accent); }
+  #shipBlock.hide{ display:none; }
+  .pay{ display:flex; flex-direction:column; gap:12px; }
+  .pay label.opt{ display:flex; align-items:center; gap:12px; border:1px solid var(--hair); padding:15px 16px; cursor:pointer; font-size:14px; letter-spacing:0; text-transform:none; color:var(--ink); margin:0; transition:border-color .18s; }
+  .pay label.opt:hover{ border-color:var(--ink-soft); }
+  .pay label.opt input{ width:auto; accent-color:var(--accent); }
+  .pay label.opt b{ font-weight:600; }
+
+  /* summary */
+  .summary{ position:sticky; top:74px; border:1px solid var(--ink); background:var(--paper); }
+  .summary .hd{ background:var(--ink); color:var(--paper); padding:16px 22px; font-size:11px; letter-spacing:.2em; text-transform:uppercase; }
+  .summary .bd{ padding:22px; }
+  .summary .cover-mini{ position:relative; aspect-ratio:3/3.9; overflow:hidden; background:var(--ink); border:1px solid var(--hair); margin-bottom:20px; max-width:150px; }
+  .summary .cover-mini img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .summary .cover-mini .sc{ position:absolute; inset:0; background:linear-gradient(180deg,rgba(20,14,8,.5),rgba(20,14,8,0) 30%,rgba(20,14,8,.7)); }
+  .summary .cover-mini .cm{ position:absolute; top:8px; left:0; right:0; text-align:center; color:#fff; font-family:var(--serif); font-weight:600; font-size:22px; }
+  .summary .cover-mini .cm em{ font-style:italic; color:oklch(0.82 0.1 58); }
+  .summary .row{ display:flex; justify-content:space-between; align-items:baseline; padding:9px 0; font-size:14px; color:var(--ink-soft); }
+  .summary .row b{ color:var(--ink); font-weight:600; }
+  .summary .row.plan-row{ border-bottom:1px solid var(--hair); padding-bottom:14px; margin-bottom:6px; }
+  .summary .row.plan-row .pn{ font-family:var(--serif); font-size:20px; color:var(--ink); }
+  .summary .total{ display:flex; justify-content:space-between; align-items:baseline; border-top:1px solid var(--ink); margin-top:12px; padding-top:16px; }
+  .summary .total .lbl{ font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-soft); }
+  .summary .total .amt{ font-family:var(--serif); font-weight:600; font-size:34px; }
+  .summary .total .amt small{ font-size:13px; color:var(--ink-soft); font-family:var(--sans); }
+  .summary .btn{ width:100%; justify-content:center; margin-top:18px; }
+  .summary .fine{ font-size:11px; color:var(--ink-soft); line-height:1.5; margin-top:14px; text-align:center; }
+
+  /* benefits */
+  .benefits{ display:grid; grid-template-columns:repeat(4,1fr); gap:30px; }
+  .ben .ic{ font-size:26px; color:var(--accent); }
+  .ben h4{ font-family:var(--serif); font-weight:600; font-size:21px; margin:10px 0 6px; border-top:1px solid var(--ink); padding-top:13px; }
+  .ben p{ font-size:13px; color:var(--ink-soft); line-height:1.55; margin:0; }
+
+  .price-note{ text-align:center; font-size:10px; letter-spacing:.1em; color:oklch(0.62 0.02 60); margin-top:18px; }
+
+  @media(max-width:920px){
+    .plans{ grid-template-columns:1fr; }
+    .checkout{ grid-template-columns:1fr; gap:38px; }
+    .summary{ position:static; }
+    .benefits{ grid-template-columns:1fr 1fr; }
+  }
+  @media(max-width:560px){ .vform .two,.vform .three{ grid-template-columns:1fr; } .benefits{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body data-screen-label="Suscríbete">
+
+  <div class="util">
+    <div class="wrap">
+      <span class="date">Los Ángeles, Biobío · Suscripciones</span>
+      <div class="soc">
+        <a href="Contacto.html" class="search">⌕ Contacto</a>
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Instagram">◎</a>
+        <a href="#" title="WhatsApp">✆</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="masthead">
+    <div class="wrap">
+      <a href="Home Hi-Fi.html"><div class="mark serif">Ví<em>a</em></div></a>
+      <div class="tag">Una revista con identidad local</div>
+    </div>
+  </header>
+
+  <nav class="main">
+    <div class="wrap">
+      <a href="Artículo.html">En Portada</a>
+      <a href="#">En Escena</a>
+      <a href="Sección.html">Moda</a>
+      <a href="#">Salud</a>
+      <a href="#">Historia</a>
+      <a href="#">Sociedad</a>
+      <a href="Sección.html">Vía Explora</a>
+      <a href="#">Gastronomía</a>
+      <a href="Ediciones.html">Ediciones</a>
+      <a href="Anúnciate.html" class="cta">Anúnciate</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <div class="crumbs">
+      <a href="Home Hi-Fi.html">Inicio</a><span class="sep">/</span>
+      <span>Suscríbete</span>
+    </div>
+
+    <div class="sec-intro">
+      <span class="kicker">Suscripción</span>
+      <h1 class="serif">Recibe <em>Vía</em> cada mes</h1>
+      <p>La revista que cuenta tu ciudad, en tu casa o en tu pantalla. Elige tu plan y no te pierdas ninguna edición.</p>
+    </div>
+
+    <!-- BILLING TOGGLE -->
+    <div class="billing">
+      <div class="seg" id="seg">
+        <span class="slider" id="slider"></span>
+        <button class="on" data-cycle="monthly">Mensual</button>
+        <button data-cycle="annual">Anual<span class="save">Ahorra 2 meses</span></button>
+      </div>
+    </div>
+
+    <!-- PLANS -->
+    <div class="plans" id="plans">
+      <div class="plan" data-plan="digital" data-name="Plan Digital" data-m="2990" data-a="29900">
+        <div class="tier">Digital</div>
+        <h3 class="serif">Vía Digital</h3>
+        <div class="desc">La edición completa, navegable desde cualquier dispositivo.</div>
+        <div class="price"><span class="amt">$2.990</span><span class="per">/ mes</span></div>
+        <ul>
+          <li>Edición digital cada mes</li>
+          <li>Acceso a ediciones anteriores</li>
+          <li>Lectura en celular, tablet y PC</li>
+        </ul>
+        <div class="pick"></div>
+      </div>
+
+      <div class="plan sel" data-plan="combo" data-name="Plan Combo" data-m="7990" data-a="79900">
+        <div class="ribbon">Más elegido</div>
+        <div class="tier">Impresa + Digital</div>
+        <h3 class="serif">Vía Combo</h3>
+        <div class="desc">Lo mejor de ambos mundos: papel en casa y acceso digital.</div>
+        <div class="price"><span class="amt">$7.990</span><span class="per">/ mes</span></div>
+        <ul>
+          <li>Revista impresa en tu domicilio</li>
+          <li>Edición digital incluida</li>
+          <li>Despacho mensual sin costo*</li>
+          <li>Invitaciones a eventos Vía</li>
+        </ul>
+        <div class="pick"></div>
+      </div>
+
+      <div class="plan" data-plan="impresa" data-name="Plan Impresa" data-m="5990" data-a="59900">
+        <div class="tier">Impresa</div>
+        <h3 class="serif">Vía Impresa</h3>
+        <div class="desc">La revista física, cada mes, en la puerta de tu casa.</div>
+        <div class="price"><span class="amt">$5.990</span><span class="per">/ mes</span></div>
+        <ul>
+          <li>Revista impresa en tu domicilio</li>
+          <li>Despacho mensual sin costo*</li>
+          <li>Edición coleccionable</li>
+        </ul>
+        <div class="pick"></div>
+      </div>
+    </div>
+    <div class="price-note">*Despacho sin costo en Los Ángeles. Otras comunas: valor a confirmar. Precios en CLP, referenciales — ajustables a tu tarifa real.</div>
+
+    <!-- CHECKOUT -->
+    <div class="checkout">
+      <form class="vform" id="subForm">
+        <div class="co-block">
+          <div class="step"><span class="n serif">1</span><h2 class="serif">Tus datos</h2></div>
+          <div class="two">
+            <div class="field"><label>Nombre</label><input type="text" required placeholder="Nombre"></div>
+            <div class="field"><label>Apellido</label><input type="text" required placeholder="Apellido"></div>
+          </div>
+          <div class="two">
+            <div class="field"><label>Correo electrónico</label><input type="email" required placeholder="tucorreo@ejemplo.cl"></div>
+            <div class="field"><label>Teléfono</label><input type="tel" required placeholder="+56 9 ..."></div>
+          </div>
+        </div>
+
+        <div class="co-block" id="shipBlock">
+          <div class="step"><span class="n serif">2</span><h2 class="serif">Dirección de despacho</h2></div>
+          <div class="field"><label>Dirección</label><input type="text" placeholder="Calle y número"></div>
+          <div class="three">
+            <div class="field"><label>Depto / casa</label><input type="text" placeholder="(opcional)"></div>
+            <div class="field"><label>Comuna</label><input type="text" placeholder="Los Ángeles"></div>
+            <div class="field"><label>Región</label>
+              <select><option>Biobío</option><option>Ñuble</option><option>Araucanía</option><option>Maule</option><option>Metropolitana</option><option>Otra</option></select>
+            </div>
+          </div>
+        </div>
+
+        <div class="co-block">
+          <div class="step"><span class="n serif" id="payNum">3</span><h2 class="serif">Pago</h2></div>
+          <div class="pay">
+            <label class="opt"><input type="radio" name="pay" checked> <b>Webpay</b> · tarjeta de crédito o débito</label>
+            <label class="opt"><input type="radio" name="pay"> <b>Transferencia bancaria</b> · te enviamos los datos</label>
+            <label class="opt"><input type="radio" name="pay"> <b>Mercado Pago</b></label>
+          </div>
+        </div>
+      </form>
+
+      <!-- SUMMARY -->
+      <aside class="summary">
+        <div class="hd">Resumen de tu suscripción</div>
+        <div class="bd">
+          <div class="cover-mini">
+            <img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/DSC09735-DxO_DeepPRIME-3-editada-e1778015451518-768x501.jpg" alt="">
+            <div class="sc"></div>
+            <div class="cm serif">Ví<em>a</em></div>
+          </div>
+          <div class="row plan-row"><span class="pn serif" id="sumName">Plan Combo</span></div>
+          <div class="row"><span>Modalidad</span><b id="sumCycle">Mensual</b></div>
+          <div class="row"><span>Entrega</span><b id="sumDelivery">Impresa + Digital</b></div>
+          <div class="row" id="rowSave" style="display:none;"><span>Ahorro anual</span><b id="sumSave" style="color:var(--accent);">—</b></div>
+          <div class="total">
+            <span class="lbl">Total</span>
+            <span class="amt serif" id="sumTotal">$7.990 <small id="sumPer">/ mes</small></span>
+          </div>
+          <button class="btn primary" type="submit" form="subForm" id="payBtn">Ir a pagar</button>
+          <div class="fine">Puedes pausar o cancelar cuando quieras. Sin permanencia.</div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- BENEFITS -->
+    <section style="padding-top:70px;">
+      <div class="sec-head"><h2 class="serif">Por qué suscribirte</h2><span class="rule"></span></div>
+      <div class="benefits">
+        <div class="ben"><div class="ic">✦</div><h4 class="serif">Antes que nadie</h4><p>Recíbela apenas sale, sin depender de los puntos de distribución.</p></div>
+        <div class="ben"><div class="ic">⌂</div><h4 class="serif">En tu casa</h4><p>Despacho mensual a domicilio para los planes con revista impresa.</p></div>
+        <div class="ben"><div class="ic">◷</div><h4 class="serif">Archivo completo</h4><p>Acceso a todas las ediciones digitales, cuando quieras leerlas.</p></div>
+        <div class="ben"><div class="ic">♥</div><h4 class="serif">Apoyas lo local</h4><p>Cada suscripción sostiene el periodismo con identidad de tu ciudad.</p></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- confirmation overlay -->
+  <div id="done" style="display:none; position:fixed; inset:0; background:oklch(0.255 0.018 55 / .55); z-index:100; place-items:center;">
+    <div style="background:var(--paper); max-width:440px; margin:0 24px; padding:42px 38px; text-align:center; border:1px solid var(--ink); box-shadow:14px 16px 0 oklch(0.555 0.115 42 / .25);">
+      <div style="font-family:var(--serif); font-size:54px; color:var(--accent); line-height:1;">✦</div>
+      <h3 style="font-family:var(--serif); font-weight:600; font-size:32px; margin:14px 0 10px;">¡Bienvenido a Vía!</h3>
+      <p style="font-size:14.5px; color:var(--ink-soft); line-height:1.6; margin:0 0 24px;">Tu suscripción <b id="doneName">Combo</b> está casi lista. Te llevaríamos al pago seguro para confirmarla.</p>
+      <button class="btn ghost" onclick="document.getElementById('done').style.display='none'">Cerrar</button>
+    </div>
+  </div>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="top">
+        <div>
+          <div class="mark serif">Ví<em>a</em></div>
+          <div class="tag">Una revista con identidad local</div>
+          <p style="font-size:13.5px; max-width:38ch; margin:18px 0 0; color:oklch(0.78 0.014 72); line-height:1.6;">Revista mensual de Los Ángeles, Región del Biobío. Historias, gente y lugares que nos hacen comunidad.</p>
+        </div>
+        <div>
+          <h5>Secciones</h5>
+          <ul>
+            <li><a href="Artículo.html">En Portada</a></li>
+            <li><a href="Sección.html">Moda &amp; Tendencias</a></li>
+            <li><a href="#">Gastronomía</a></li>
+            <li><a href="Sección.html">Vía Explora</a></li>
+            <li><a href="#">Sociales</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Revista</h5>
+          <ul>
+            <li><a href="Suscríbete.html">Suscríbete</a></li>
+            <li><a href="Ediciones.html">Ediciones anteriores</a></li>
+            <li><a href="Anúnciate.html">Anúnciate con nosotros</a></li>
+            <li><a href="Contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="bottom">
+        <span>© 2026 Vía Producciones · Los Ángeles, Chile</span>
+        <div class="fsoc">
+          <a href="#" title="Facebook">f</a>
+          <a href="#" title="Instagram">◎</a>
+          <a href="#" title="WhatsApp">✆</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    var state = { plan: 'combo', cycle: 'monthly' };
+    var fmt = function(n){ return '$' + n.toLocaleString('es-CL'); };
+
+    function planEl(){ return document.querySelector('.plan[data-plan="'+state.plan+'"]'); }
+
+    function updateCards(){
+      document.querySelectorAll('.plan').forEach(function(p){
+        var m = +p.dataset.m, a = +p.dataset.a;
+        var amt = p.querySelector('.amt'), per = p.querySelector('.per');
+        if(state.cycle === 'monthly'){ amt.textContent = fmt(m); per.textContent = '/ mes'; }
+        else { amt.textContent = fmt(a); per.textContent = '/ año'; }
+      });
+    }
+
+    function updateSummary(){
+      var p = planEl();
+      var m = +p.dataset.m, a = +p.dataset.a;
+      document.getElementById('sumName').textContent = p.dataset.name;
+      document.getElementById('sumCycle').textContent = state.cycle === 'monthly' ? 'Mensual' : 'Anual';
+      var deliv = state.plan === 'digital' ? 'Solo digital' : (state.plan === 'impresa' ? 'Solo impresa' : 'Impresa + Digital');
+      document.getElementById('sumDelivery').textContent = deliv;
+
+      var total = state.cycle === 'monthly' ? m : a;
+      document.getElementById('sumTotal').innerHTML = fmt(total) + ' <small>' + (state.cycle==='monthly'?'/ mes':'/ año') + '</small>';
+
+      var rowSave = document.getElementById('rowSave');
+      if(state.cycle === 'annual'){
+        var saving = (m*12) - a;
+        document.getElementById('sumSave').textContent = saving>0 ? fmt(saving) : '—';
+        rowSave.style.display = saving>0 ? 'flex' : 'none';
+      } else { rowSave.style.display = 'none'; }
+
+      // shipping block + pay step number
+      var physical = state.plan !== 'digital';
+      var ship = document.getElementById('shipBlock');
+      ship.classList.toggle('hide', !physical);
+      document.getElementById('payNum').textContent = physical ? '3' : '2';
+    }
+
+    // plan selection
+    document.getElementById('plans').addEventListener('click', function(e){
+      var card = e.target.closest('.plan'); if(!card) return;
+      document.querySelectorAll('.plan').forEach(function(p){ p.classList.remove('sel'); });
+      card.classList.add('sel');
+      state.plan = card.dataset.plan;
+      updateSummary();
+    });
+
+    // billing toggle
+    var seg = document.getElementById('seg');
+    var slider = document.getElementById('slider');
+    seg.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click', function(){
+        seg.querySelectorAll('button').forEach(function(x){ x.classList.remove('on'); });
+        b.classList.add('on');
+        state.cycle = b.dataset.cycle;
+        slider.style.transform = state.cycle === 'annual' ? 'translateX(100%)' : 'translateX(0)';
+        updateCards();
+        updateSummary();
+      });
+    });
+
+    // submit
+    document.getElementById('subForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      document.getElementById('doneName').textContent = planEl().dataset.name.replace('Plan ','');
+      var o = document.getElementById('done'); o.style.display='grid';
+    });
+
+    updateCards(); updateSummary();
+  </script>
+</body>
+</html>

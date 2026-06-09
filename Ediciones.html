@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ediciones — Vía Los Ángeles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/via.css">
+<style>
+  .sec-intro{ text-align:center; max-width:760px; margin:0 auto; padding:36px 0 24px; }
+  .sec-intro .kicker{ display:inline-flex; gap:12px; align-items:center; }
+  .sec-intro .kicker::before,.sec-intro .kicker::after{ content:""; width:40px; height:1px; background:var(--accent); }
+  .sec-intro h1{ font-family:var(--serif); font-weight:600; font-size:clamp(48px,6vw,76px); line-height:.95; margin:14px 0 14px; }
+  .sec-intro p{ font-family:var(--serif); font-style:italic; font-size:22px; line-height:1.34; color:var(--ink-soft); margin:0 auto; max-width:48ch; }
+
+  /* faux cover (reusable) */
+  .vcover{ position:relative; aspect-ratio:3/3.9; overflow:hidden; background:var(--ink); border:1px solid var(--hair);
+           box-shadow:0 2px 1px rgba(60,45,30,.04), 12px 16px 30px -18px rgba(60,40,25,.5); transition:transform .3s, box-shadow .3s; }
+  .vcover img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .vcover .scrim{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(20,14,8,.5) 0%, rgba(20,14,8,0) 28%, rgba(20,14,8,.05) 55%, rgba(20,14,8,.78) 100%); }
+  .vcover .cmark{ position:absolute; top:0; left:0; right:0; text-align:center; padding:14px 14px 0; color:var(--paper); font-family:var(--serif); font-weight:600; font-size:30px; line-height:.85; }
+  .vcover .cmark em{ font-style:italic; color:oklch(0.82 0.1 58); }
+  .vcover .cmark span{ display:block; font-family:var(--sans); font-size:7px; letter-spacing:.34em; text-transform:uppercase; margin-top:5px; opacity:.9; }
+  .vcover .iss{ position:absolute; top:12px; right:0; background:var(--accent); color:#fff; font-size:8px; letter-spacing:.16em; padding:4px 10px; font-weight:600; }
+  .vcover .lines{ position:absolute; left:14px; right:14px; bottom:14px; color:var(--paper); font-family:var(--serif); font-weight:600; font-size:17px; line-height:1.05; }
+
+  /* featured current edition */
+  .current{ display:grid; grid-template-columns:330px 1fr; gap:48px; align-items:center; padding:14px 0 8px; }
+  .current .vcover{ box-shadow:0 4px 2px rgba(60,45,30,.05), 22px 26px 48px -22px rgba(60,40,25,.6); }
+  .current .info .kicker{ display:inline-flex; gap:10px; align-items:center; }
+  .current .info .kicker::after{ content:""; width:42px; height:1px; background:var(--accent); }
+  .current .info h2{ font-family:var(--serif); font-weight:600; font-size:clamp(40px,5vw,60px); line-height:.98; margin:12px 0 8px; }
+  .current .info .nº{ font-family:var(--serif); font-style:italic; font-size:22px; color:var(--ink-soft); margin:0 0 16px; }
+  .current .info p{ font-size:15px; color:var(--ink-soft); line-height:1.6; max-width:46ch; margin:0 0 24px; }
+  .current .actions{ display:flex; gap:12px; flex-wrap:wrap; }
+  .current .toc{ margin-top:26px; padding-top:20px; border-top:1px solid var(--hair); display:flex; gap:10px 22px; flex-wrap:wrap; }
+  .current .toc span{ font-size:12px; letter-spacing:.06em; color:var(--ink-soft); }
+  .current .toc span::before{ content:"·"; color:var(--accent); margin-right:8px; font-weight:700; }
+
+  /* archive grid */
+  .arch{ display:grid; grid-template-columns:repeat(4,1fr); gap:34px 30px; }
+  .arch a{ display:block; }
+  .arch a:hover .vcover{ transform:translateY(-5px); box-shadow:0 6px 3px rgba(60,45,30,.06), 18px 24px 42px -18px rgba(60,40,25,.6); }
+  .arch .cap{ display:flex; align-items:baseline; justify-content:space-between; margin-top:13px; }
+  .arch .cap .m{ font-family:var(--serif); font-weight:600; font-size:19px; }
+  .arch .cap .n{ font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); }
+
+  .yr-head{ display:flex; align-items:center; gap:16px; margin:18px 0 26px; }
+  .yr-head h3{ font-family:var(--serif); font-style:italic; font-weight:500; font-size:26px; margin:0; color:var(--ink-soft); }
+  .yr-head .rule{ flex:1; height:1px; background:var(--hair); }
+
+  @media(max-width:920px){
+    .current{ grid-template-columns:260px 1fr; gap:32px; }
+    .arch{ grid-template-columns:repeat(3,1fr); }
+  }
+  @media(max-width:640px){
+    .current{ grid-template-columns:1fr; }
+    .current .vcover{ max-width:280px; }
+    .arch{ grid-template-columns:repeat(2,1fr); }
+  }
+</style>
+</head>
+<body data-screen-label="Ediciones">
+
+  <div class="util">
+    <div class="wrap">
+      <span class="date">Los Ángeles, Biobío · Archivo digital</span>
+      <div class="soc">
+        <a href="Suscríbete.html" class="search" style="border:1px solid var(--accent);color:var(--accent);border-radius:20px;padding:5px 14px;">★ Suscríbete</a><span class="search">⌕ Buscar</span>
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Instagram">◎</a>
+        <a href="#" title="WhatsApp">✆</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="masthead">
+    <div class="wrap">
+      <a href="Home Hi-Fi.html"><div class="mark serif">Ví<em>a</em></div></a>
+      <div class="tag">Una revista con identidad local</div>
+    </div>
+  </header>
+
+  <nav class="main">
+    <div class="wrap">
+      <a href="#">En Portada</a>
+      <a href="#">En Escena</a>
+      <a href="Sección.html">Moda</a>
+      <a href="#">Salud</a>
+      <a href="#">Historia</a>
+      <a href="#">Sociedad</a>
+      <a href="Sección.html">Vía Explora</a>
+      <a href="#">Gastronomía</a>
+      <a href="#" class="on">Ediciones</a>
+      <a href="Anúnciate.html" class="cta">Anúnciate</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <div class="crumbs">
+      <a href="Home Hi-Fi.html">Inicio</a><span class="sep">/</span>
+      <span>Ediciones</span>
+    </div>
+
+    <div class="sec-intro">
+      <span class="kicker">Edición digital</span>
+      <h1 class="serif">Ediciones</h1>
+      <p>Hojea la revista completa mes a mes. Cada edición queda disponible en formato digital para leer cuando quieras.</p>
+    </div>
+
+    <!-- CURRENT -->
+    <section class="current">
+      <div class="vcover">
+        <img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/DSC09735-DxO_DeepPRIME-3-editada-e1778015451518-768x501.jpg" alt="">
+        <div class="scrim"></div>
+        <div class="iss">Nº 21</div>
+        <div class="cmark serif">Ví<em>a</em><span>Los Ángeles</span></div>
+        <div class="lines">Lucca Bakery · Moda O-I · Huerquehue</div>
+      </div>
+      <div class="info">
+        <span class="kicker">Edición actual</span>
+        <h2 class="serif">Mayo 2026</h2>
+        <div class="nº serif">Número 21</div>
+        <p>El emprendimiento familiar Lucca Bakery en portada, moda de otoño-invierno, el teatro angelino y una escapada al Parque Nacional Huerquehue.</p>
+        <div class="actions">
+          <a class="btn primary" href="#">📖 Leer edición digital</a>
+          <a class="btn ghost" href="#">Ver índice</a>
+        </div>
+        <div class="toc">
+          <span>En Portada</span><span>Moda</span><span>Salud</span><span>Sociedad</span><span>Vía Explora</span><span>Sociales</span><span>Gastronomía</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="ad leader" style="margin:46px 0 10px;">
+      <span class="lbl">Espacio destacado</span>
+      <span class="sz">Banner · 970 × 120</span>
+    </div>
+
+    <!-- ARCHIVE -->
+    <section style="padding-top:30px;">
+      <div class="yr-head"><h3 class="serif">2026</h3><span class="rule"></span></div>
+      <div class="arch">
+        <a href="#">
+          <div class="vcover">
+            <img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/MODA-1-e1778101333238.jpg" alt="">
+            <div class="scrim"></div><div class="iss">Nº 20</div>
+            <div class="cmark serif">Ví<em>a</em></div>
+            <div class="lines">Especial otoño</div>
+          </div>
+          <div class="cap"><span class="m serif">Abril</span><span class="n">Nº 20</span></div>
+        </a>
+        <a href="#">
+          <div class="vcover">
+            <img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/recorriendo-editada-3-768x817.jpg" alt="">
+            <div class="scrim"></div><div class="iss">Nº 19</div>
+            <div class="cmark serif">Ví<em>a</em></div>
+            <div class="lines">Historia local</div>
+          </div>
+          <div class="cap"><span class="m serif">Marzo</span><span class="n">Nº 19</span></div>
+        </a>
+        <a href="#">
+          <div class="vcover">
+            <img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/Grupal-1-e1777984252755-768x622.jpg" alt="">
+            <div class="scrim"></div><div class="iss">Nº 18</div>
+            <div class="cmark serif">Ví<em>a</em></div>
+            <div class="lines">Verano en comunidad</div>
+          </div>
+          <div class="cap"><span class="m serif">Febrero</span><span class="n">Nº 18</span></div>
+        </a>
+        <a href="#">
+          <div class="vcover">
+            <img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/0743A034-B030-42F0-9E86-334C1B1F874C-4-768x1018.jpg" alt="">
+            <div class="scrim"></div><div class="iss">Nº 17</div>
+            <div class="cmark serif">Ví<em>a</em></div>
+            <div class="lines">Aire libre</div>
+          </div>
+          <div class="cap"><span class="m serif">Enero</span><span class="n">Nº 17</span></div>
+        </a>
+      </div>
+
+      <div class="yr-head" style="margin-top:46px;"><h3 class="serif">2025</h3><span class="rule"></span></div>
+      <div class="arch">
+        <a href="#">
+          <div class="vcover">
+            <img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/GASTRO-MAYO-final-2-768x537.jpg" alt="">
+            <div class="scrim"></div><div class="iss">Nº 16</div>
+            <div class="cmark serif">Ví<em>a</em></div>
+            <div class="lines">Sabores de fin de año</div>
+          </div>
+          <div class="cap"><span class="m serif">Diciembre</span><span class="n">Nº 16</span></div>
+        </a>
+        <a href="#">
+          <div class="vcover">
+            <img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/Agrupacion-Cultural-Perfiles-Siluetas.jpg" alt="">
+            <div class="scrim"></div><div class="iss">Nº 15</div>
+            <div class="cmark serif">Ví<em>a</em></div>
+            <div class="lines">Cultura viva</div>
+          </div>
+          <div class="cap"><span class="m serif">Noviembre</span><span class="n">Nº 15</span></div>
+        </a>
+        <a href="#">
+          <div class="vcover">
+            <img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/ODONTO-MAYO-768x533.jpg" alt="">
+            <div class="scrim"></div><div class="iss">Nº 14</div>
+            <div class="cmark serif">Ví<em>a</em></div>
+            <div class="lines">Bienestar</div>
+          </div>
+          <div class="cap"><span class="m serif">Octubre</span><span class="n">Nº 14</span></div>
+        </a>
+        <a href="#">
+          <div class="vcover">
+            <img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/Francine-Ellena-Carolina-Sobarzo-y-Carolina-Vivallo-1-e1778116548443-768x550.jpg" alt="">
+            <div class="scrim"></div><div class="iss">Nº 13</div>
+            <div class="cmark serif">Ví<em>a</em></div>
+            <div class="lines">Primavera social</div>
+          </div>
+          <div class="cap"><span class="m serif">Septiembre</span><span class="n">Nº 13</span></div>
+        </a>
+      </div>
+
+      <div class="pager" style="display:flex; justify-content:center; gap:8px; margin:48px 0 0;">
+        <a class="btn ghost sm" href="#">Cargar ediciones anteriores</a>
+      </div>
+    </section>
+  </div>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="top">
+        <div>
+          <div class="mark serif">Ví<em>a</em></div>
+          <div class="tag">Una revista con identidad local</div>
+          <p style="font-size:13.5px; max-width:38ch; margin:18px 0 0; color:oklch(0.78 0.014 72); line-height:1.6;">Revista mensual de Los Ángeles, Región del Biobío. Historias, gente y lugares que nos hacen comunidad.</p>
+        </div>
+        <div>
+          <h5>Secciones</h5>
+          <ul>
+            <li><a href="#">En Portada</a></li>
+            <li><a href="Sección.html">Moda &amp; Tendencias</a></li>
+            <li><a href="#">Gastronomía</a></li>
+            <li><a href="Sección.html">Vía Explora</a></li>
+            <li><a href="#">Sociales</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Revista</h5>
+          <ul>
+            <li><a href="Suscríbete.html">Suscríbete</a></li>
+            <li><a href="#">Ediciones anteriores</a></li>
+            <li><a href="Anúnciate.html">Anúnciate con nosotros</a></li>
+            <li><a href="Contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="bottom">
+        <span>© 2026 Vía Producciones · Los Ángeles, Chile</span>
+        <div class="fsoc">
+          <a href="#" title="Facebook">f</a>
+          <a href="#" title="Instagram">◎</a>
+          <a href="#" title="WhatsApp">✆</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

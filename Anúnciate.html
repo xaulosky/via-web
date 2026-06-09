@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anúnciate — Vía Los Ángeles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/via.css">
+<style>
+  /* HERO */
+  .pitch{ display:grid; grid-template-columns:1.1fr .9fr; gap:54px; align-items:center; padding:48px 0 12px; }
+  .pitch .kicker{ display:inline-flex; gap:12px; align-items:center; }
+  .pitch .kicker::after{ content:""; width:42px; height:1px; background:var(--accent); }
+  .pitch h1{ font-family:var(--serif); font-weight:600; font-size:clamp(46px,6vw,78px); line-height:.96; letter-spacing:-.01em; margin:16px 0 16px; }
+  .pitch h1 em{ font-style:italic; color:var(--accent); }
+  .pitch p.dek{ font-family:var(--serif); font-style:italic; font-size:23px; line-height:1.34; color:var(--ink-soft); margin:0 0 26px; max-width:42ch; }
+  .pitch .actions{ display:flex; gap:12px; flex-wrap:wrap; }
+  .pitch-art{ position:relative; aspect-ratio:4/5; }
+  .pitch-art img{ width:100%; height:100%; object-fit:cover; border:1px solid var(--hair); }
+  .pitch-art .badge{ position:absolute; bottom:-18px; left:-18px; background:var(--paper); border:1px solid var(--ink); padding:16px 20px; box-shadow:8px 8px 0 var(--accent); }
+  .pitch-art .badge .big{ font-family:var(--serif); font-weight:600; font-size:36px; line-height:1; }
+  .pitch-art .badge .sm{ font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-soft); margin-top:4px; }
+
+  /* STATS */
+  .stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--hair); border:1px solid var(--hair); margin:54px 0 0; }
+  .stats .s{ background:var(--paper); padding:30px 22px; text-align:center; }
+  .stats .s .n{ font-family:var(--serif); font-weight:600; font-size:46px; line-height:1; color:var(--accent); }
+  .stats .s .l{ font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-soft); margin-top:10px; }
+  .stats-note{ font-family:var(--sans); font-size:10px; letter-spacing:.1em; color:oklch(0.62 0.02 60); text-align:center; margin-top:12px; }
+
+  /* VALUE */
+  .value{ display:grid; grid-template-columns:repeat(3,1fr); gap:40px; padding:30px 0 0; }
+  .value .v .num{ font-family:var(--serif); font-style:italic; font-size:24px; color:var(--accent); }
+  .value .v h3{ font-family:var(--serif); font-weight:600; font-size:26px; line-height:1.05; margin:8px 0 8px; border-top:1px solid var(--ink); padding-top:14px; }
+  .value .v p{ font-size:14px; line-height:1.6; color:var(--ink-soft); margin:0; }
+
+  /* FORMATS */
+  .formats{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  .fmt{ border:1px solid var(--hair); padding:20px; display:flex; flex-direction:column; gap:14px; background:var(--paper); }
+  .fmt .demo{ height:150px; }
+  .fmt .demo.tall{ height:240px; }
+  .fmt h4{ font-family:var(--serif); font-weight:600; font-size:22px; margin:0; }
+  .fmt .row{ display:flex; justify-content:space-between; align-items:baseline; gap:10px; }
+  .fmt .sz{ font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-soft); }
+  .fmt p{ font-size:13px; line-height:1.55; color:var(--ink-soft); margin:0; }
+
+  /* PLANS */
+  .plans{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  .plan{ border:1px solid var(--hair); padding:30px 26px; display:flex; flex-direction:column; background:var(--paper); }
+  .plan.feat{ border-color:var(--ink); box-shadow:10px 12px 0 oklch(0.555 0.115 42 / .14); }
+  .plan .tier{ font-size:11px; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--accent); }
+  .plan h3{ font-family:var(--serif); font-weight:600; font-size:32px; margin:8px 0 4px; }
+  .plan .price{ font-family:var(--serif); font-style:italic; font-size:18px; color:var(--ink-soft); margin-bottom:18px; padding-bottom:18px; border-bottom:1px solid var(--hair); }
+  .plan ul{ list-style:none; margin:0 0 24px; padding:0; display:flex; flex-direction:column; gap:11px; flex:1; }
+  .plan ul li{ font-size:13.5px; color:oklch(0.34 0.018 55); padding-left:22px; position:relative; line-height:1.4; }
+  .plan ul li::before{ content:"✦"; position:absolute; left:0; color:var(--accent); font-size:11px; top:2px; }
+
+  /* DISTRIBUTION */
+  .dist{ display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
+  .dist .points{ columns:2; column-gap:30px; }
+  .dist .points div{ break-inside:avoid; font-size:14px; color:var(--ink-soft); padding:9px 0; border-bottom:1px solid var(--hair-soft); }
+  .dist .points div b{ color:var(--ink); font-weight:600; }
+  .dist .img{ aspect-ratio:1/1; }
+  .dist .img img{ width:100%; height:100%; object-fit:cover; border:1px solid var(--hair); }
+
+  /* CONTACT */
+  .contact{ background:var(--ink); color:oklch(0.9 0.014 72); padding:60px 0; margin-top:64px; }
+  .contact .grid{ display:grid; grid-template-columns:1fr 1fr; gap:54px; max-width:var(--maxw); margin:0 auto; padding:0 28px; align-items:start; }
+  .contact h2{ font-family:var(--serif); font-weight:600; font-size:clamp(36px,4.6vw,54px); line-height:1; color:var(--paper); margin:10px 0 14px; }
+  .contact h2 em{ font-style:italic; color:var(--gold); }
+  .contact p{ font-size:15px; line-height:1.6; color:oklch(0.8 0.014 72); max-width:40ch; }
+  .contact .ctas{ display:flex; flex-direction:column; gap:14px; margin-top:26px; }
+  .contact .ci{ display:flex; gap:14px; align-items:center; font-size:15px; }
+  .contact .ci .ic{ width:42px; height:42px; border:1px solid oklch(0.42 0.02 55); border-radius:50%; display:grid; place-items:center; font-size:16px; color:var(--gold); flex:none; }
+  .contact .ci a{ color:var(--paper); }
+  .contact .kicker{ color:var(--gold); }
+  .form{ background:oklch(0.3 0.018 55); border:1px solid oklch(0.4 0.02 55); padding:28px; }
+  .form label{ display:block; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:oklch(0.72 0.02 60); margin:0 0 7px; }
+  .form .field{ margin-bottom:16px; }
+  .form input,.form textarea{ width:100%; background:var(--ink); border:1px solid oklch(0.42 0.02 55); color:var(--paper); padding:12px 14px; font-family:var(--sans); font-size:14px; }
+  .form input:focus,.form textarea:focus{ outline:none; border-color:var(--gold); }
+  .form textarea{ resize:vertical; min-height:90px; }
+  .form .btn{ width:100%; justify-content:center; border-color:var(--gold); background:var(--gold); color:var(--ink); }
+  .form .btn:hover{ background:transparent; color:var(--gold); }
+
+  @media(max-width:920px){
+    .pitch{ grid-template-columns:1fr; gap:40px; }
+    .pitch-art{ max-width:420px; }
+    .stats{ grid-template-columns:1fr 1fr; }
+    .value,.formats,.plans{ grid-template-columns:1fr; }
+    .formats{ grid-template-columns:1fr 1fr; }
+    .dist{ grid-template-columns:1fr; }
+    .contact .grid{ grid-template-columns:1fr; gap:36px; }
+  }
+  @media(max-width:560px){ .formats{ grid-template-columns:1fr; } .dist .points{ columns:1; } }
+</style>
+</head>
+<body data-screen-label="Anúnciate">
+
+  <div class="util">
+    <div class="wrap">
+      <span class="date">Los Ángeles, Biobío · Información comercial</span>
+      <div class="soc">
+        <a href="Suscríbete.html" class="search" style="border:1px solid var(--accent);color:var(--accent);border-radius:20px;padding:5px 14px;">★ Suscríbete</a><span class="search">⌕ Buscar</span>
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Instagram">◎</a>
+        <a href="#" title="WhatsApp">✆</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="masthead">
+    <div class="wrap">
+      <a href="Home Hi-Fi.html"><div class="mark serif">Ví<em>a</em></div></a>
+      <div class="tag">Una revista con identidad local</div>
+    </div>
+  </header>
+
+  <nav class="main">
+    <div class="wrap">
+      <a href="#">En Portada</a>
+      <a href="#">En Escena</a>
+      <a href="Sección.html">Moda</a>
+      <a href="#">Salud</a>
+      <a href="#">Historia</a>
+      <a href="#">Sociedad</a>
+      <a href="Sección.html">Vía Explora</a>
+      <a href="#">Gastronomía</a>
+      <a href="Ediciones.html">Ediciones</a>
+      <a href="Anúnciate.html" class="cta on">Anúnciate</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <div class="crumbs">
+      <a href="Home Hi-Fi.html">Inicio</a><span class="sep">/</span>
+      <span>Anúnciate</span>
+    </div>
+
+    <!-- PITCH -->
+    <section class="pitch">
+      <div>
+        <span class="kicker">Anúnciate en Vía</span>
+        <h1 class="serif">Llega a quienes <em>viven</em> Los Ángeles</h1>
+        <p class="dek serif">Tu marca, junto a las historias que la comunidad lee y guarda cada mes. En papel y en digital.</p>
+        <div class="actions">
+          <a class="btn primary" href="#">Descargar media kit</a>
+          <a class="btn ghost" href="https://wa.me/56973353108">Escríbenos por WhatsApp</a>
+        </div>
+      </div>
+      <div class="pitch-art">
+        <img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/Francine-Ellena-Carolina-Sobarzo-y-Carolina-Vivallo-1-e1778116548443-768x550.jpg" alt="">
+        <div class="badge">
+          <div class="big serif">11 años</div>
+          <div class="sm">conectando marcas y comunidad</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section>
+      <div class="stats">
+        <div class="s"><div class="n serif">5.000</div><div class="l">Ejemplares / mes</div></div>
+        <div class="s"><div class="n serif">+40k</div><div class="l">Seguidores en redes</div></div>
+        <div class="s"><div class="n serif">120+</div><div class="l">Puntos de distribución</div></div>
+        <div class="s"><div class="n serif">100%</div><div class="l">Identidad local</div></div>
+      </div>
+      <div class="stats-note">cifras referenciales — reemplazables con tus datos reales de tirada y alcance</div>
+    </section>
+
+    <!-- VALUE -->
+    <section style="padding-top:64px;">
+      <div class="sec-head"><h2 class="serif">Por qué Vía</h2><span class="rule"></span></div>
+      <div class="value">
+        <div class="v">
+          <div class="num serif">01</div>
+          <h3 class="serif">Público fiel y local</h3>
+          <p>Lectores de Los Ángeles y la provincia del Biobío que buscan, mes a mes, lo que pasa en su ciudad. Una audiencia cercana y de alto interés.</p>
+        </div>
+        <div class="v">
+          <div class="num serif">02</div>
+          <h3 class="serif">Contenido con identidad</h3>
+          <p>Tu aviso convive con periodismo de calidad sobre gente, cultura y gastronomía local. Asociación de marca en un entorno editorial cuidado.</p>
+        </div>
+        <div class="v">
+          <div class="num serif">03</div>
+          <h3 class="serif">Papel + digital</h3>
+          <p>Presencia en la revista impresa, en la edición digital navegable y en nuestras redes. Un mismo plan, múltiples puntos de contacto.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMATS -->
+    <section style="padding-top:64px;">
+      <div class="sec-head"><h2 class="serif">Formatos disponibles</h2><span class="rule"></span><span class="more">Impreso &amp; digital</span></div>
+      <div class="formats">
+        <div class="fmt">
+          <div class="ad demo tall"><span class="lbl">Impreso</span><span class="sz">Página completa</span></div>
+          <div class="row"><h4 class="serif">Página completa</h4><span class="sz">A4 · 210×297</span></div>
+          <p>Máximo impacto dentro de la revista impresa, a sangre completa.</p>
+        </div>
+        <div class="fmt">
+          <div class="ad demo tall"><span class="lbl">Impreso</span><span class="sz">Media página</span></div>
+          <div class="row"><h4 class="serif">Media página</h4><span class="sz">Horizontal / vertical</span></div>
+          <p>Excelente relación visibilidad-inversión, junto al contenido editorial.</p>
+        </div>
+        <div class="fmt">
+          <div class="ad demo tall"><span class="lbl">Premium</span><span class="sz">Contraportada</span></div>
+          <div class="row"><h4 class="serif">Tapas y contratapa</h4><span class="sz">Posición premium</span></div>
+          <p>Los espacios más vistos: portada interior, contraportada y reverso.</p>
+        </div>
+        <div class="fmt">
+          <div class="ad demo"><span class="lbl">Web</span><span class="sz">Banner cabecera</span></div>
+          <div class="row"><h4 class="serif">Banner web</h4><span class="sz">970×120 · 728×90</span></div>
+          <p>Visible en home y notas del sitio, en todos los dispositivos.</p>
+        </div>
+        <div class="fmt">
+          <div class="ad demo"><span class="lbl">Web</span><span class="sz">Sidebar</span></div>
+          <div class="row"><h4 class="serif">Recuadro lateral</h4><span class="sz">300×600 · 300×250</span></div>
+          <p>Acompaña la lectura en la columna lateral de artículos y secciones.</p>
+        </div>
+        <div class="fmt">
+          <div class="ad demo"><span class="lbl">Redes</span><span class="sz">Contenido</span></div>
+          <div class="row"><h4 class="serif">Mención en redes</h4><span class="sz">IG · FB · WhatsApp</span></div>
+          <p>Difusión de tu marca o promoción en nuestras redes sociales.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANS -->
+    <section style="padding-top:64px;">
+      <div class="sec-head"><h2 class="serif">Planes sugeridos</h2><span class="rule"></span></div>
+      <div class="plans">
+        <div class="plan">
+          <div class="tier">Esencial</div>
+          <h3 class="serif">Presencia</h3>
+          <div class="price serif">Consultar valor</div>
+          <ul>
+            <li>Media página impresa</li>
+            <li>Recuadro lateral en web (300×250)</li>
+            <li>1 mención en redes</li>
+          </ul>
+          <a class="btn ghost" href="https://wa.me/56973353108">Cotizar</a>
+        </div>
+        <div class="plan feat">
+          <div class="tier">Recomendado</div>
+          <h3 class="serif">Destacado</h3>
+          <div class="price serif">Consultar valor</div>
+          <ul>
+            <li>Página completa impresa</li>
+            <li>Banner cabecera web por 1 mes</li>
+            <li>Recuadro lateral 300×600</li>
+            <li>2 menciones en redes</li>
+          </ul>
+          <a class="btn primary" href="https://wa.me/56973353108">Cotizar</a>
+        </div>
+        <div class="plan">
+          <div class="tier">Premium</div>
+          <h3 class="serif">Portada &amp; más</h3>
+          <div class="price serif">Consultar valor</div>
+          <ul>
+            <li>Posición premium (tapas / contratapa)</li>
+            <li>Banner web destacado</li>
+            <li>Reportaje de marca (publirreportaje)</li>
+            <li>Campaña en redes</li>
+          </ul>
+          <a class="btn ghost" href="https://wa.me/56973353108">Cotizar</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- DISTRIBUTION -->
+    <section style="padding-top:64px;">
+      <div class="sec-head"><h2 class="serif">Dónde circulamos</h2><span class="rule"></span></div>
+      <div class="dist">
+        <div class="points">
+          <div><b>Cafeterías y restaurantes</b> del centro</div>
+          <div><b>Consultas médicas</b> y clínicas</div>
+          <div><b>Hoteles</b> y hospedajes</div>
+          <div><b>Tiendas</b> y boutiques</div>
+          <div><b>Salas de espera</b> y servicios</div>
+          <div><b>Eventos</b> y lanzamientos</div>
+          <div><b>Edición digital</b> en el sitio web</div>
+          <div><b>Redes sociales</b> de la revista</div>
+        </div>
+        <div class="img"><img src="https://revistavialosangeles.cl/wp-content/uploads/2026/05/Agrupacion-Cultural-Perfiles-Siluetas.jpg" alt=""></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- CONTACT -->
+  <section class="contact">
+    <div class="grid">
+      <div>
+        <span class="kicker">Conversemos</span>
+        <h2 class="serif">Reserva tu espacio en la <em>próxima edición</em></h2>
+        <p>Cuéntanos sobre tu negocio y armamos un plan a tu medida. Cierre de avisos: una semana antes de cada edición.</p>
+        <div class="ctas">
+          <div class="ci"><span class="ic">✆</span><div><div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:oklch(0.72 0.02 60)">WhatsApp</div><a href="https://wa.me/56973353108">+56 9 7335 3108</a></div></div>
+          <div class="ci"><span class="ic">✉</span><div><div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:oklch(0.72 0.02 60)">Correo</div><a href="#"><span class="__cf_email__" data-cfemail="25464a484057464c4449655740534c565144534c44494a56444b42404940560b4649">[email&#160;protected]</span></a></div></div>
+          <div class="ci"><span class="ic">◎</span><div><div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:oklch(0.72 0.02 60)">Instagram</div><a href="#">@revista.via.losangeles</a></div></div>
+        </div>
+      </div>
+      <form class="form" onsubmit="return false;">
+        <div class="field"><label>Nombre</label><input type="text" placeholder="Tu nombre"></div>
+        <div class="field"><label>Empresa / negocio</label><input type="text" placeholder="Nombre de tu marca"></div>
+        <div class="field"><label>Correo o teléfono</label><input type="text" placeholder="¿Cómo te contactamos?"></div>
+        <div class="field"><label>Mensaje</label><textarea placeholder="Cuéntanos qué te interesa..."></textarea></div>
+        <button class="btn">Enviar solicitud</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="top">
+        <div>
+          <div class="mark serif">Ví<em>a</em></div>
+          <div class="tag">Una revista con identidad local</div>
+          <p style="font-size:13.5px; max-width:38ch; margin:18px 0 0; color:oklch(0.78 0.014 72); line-height:1.6;">Revista mensual de Los Ángeles, Región del Biobío. Historias, gente y lugares que nos hacen comunidad.</p>
+        </div>
+        <div>
+          <h5>Secciones</h5>
+          <ul>
+            <li><a href="#">En Portada</a></li>
+            <li><a href="Sección.html">Moda &amp; Tendencias</a></li>
+            <li><a href="#">Gastronomía</a></li>
+            <li><a href="Sección.html">Vía Explora</a></li>
+            <li><a href="#">Sociales</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Revista</h5>
+          <ul>
+            <li><a href="Suscríbete.html">Suscríbete</a></li>
+            <li><a href="Ediciones.html">Ediciones anteriores</a></li>
+            <li><a href="Anúnciate.html">Anúnciate con nosotros</a></li>
+            <li><a href="Contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="bottom">
+        <span>© 2026 Vía Producciones · Los Ángeles, Chile</span>
+        <div class="fsoc">
+          <a href="#" title="Facebook">f</a>
+          <a href="#" title="Instagram">◎</a>
+          <a href="#" title="WhatsApp">✆</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script></body>
+</html>

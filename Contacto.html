@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contacto — Vía Los Ángeles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/via.css">
+<style>
+  .sec-intro{ text-align:center; max-width:720px; margin:0 auto; padding:36px 0 22px; }
+  .sec-intro .kicker{ display:inline-flex; gap:12px; align-items:center; }
+  .sec-intro .kicker::before,.sec-intro .kicker::after{ content:""; width:40px; height:1px; background:var(--accent); }
+  .sec-intro h1{ font-family:var(--serif); font-weight:600; font-size:clamp(48px,6vw,76px); line-height:.95; margin:14px 0 14px; }
+  .sec-intro p{ font-family:var(--serif); font-style:italic; font-size:22px; line-height:1.34; color:var(--ink-soft); margin:0 auto; max-width:46ch; }
+
+  .c-layout{ display:grid; grid-template-columns:1.15fr .85fr; gap:54px; padding:24px 0 0; align-items:start; }
+
+  /* form (shared look, light theme) */
+  .vform .field{ margin-bottom:20px; }
+  .vform .two{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .vform label{ display:block; font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-soft); margin:0 0 8px; }
+  .vform input,.vform select,.vform textarea{ width:100%; background:var(--paper); border:1px solid var(--hair); color:var(--ink); padding:13px 14px; font-family:var(--sans); font-size:14.5px; transition:border-color .18s; }
+  .vform input:focus,.vform select:focus,.vform textarea:focus{ outline:none; border-color:var(--accent); }
+  .vform textarea{ resize:vertical; min-height:130px; }
+  .vform .btn{ width:100%; justify-content:center; }
+  .form-note{ font-size:12px; color:var(--ink-soft); margin-top:14px; text-align:center; }
+  .ok{ display:none; border:1px solid var(--accent); background:oklch(0.555 0.115 42 / .08); padding:16px 18px; font-size:14px; color:var(--accent-deep); margin-bottom:20px; }
+  .ok.show{ display:block; }
+
+  /* contact details */
+  .c-info{ display:flex; flex-direction:column; gap:0; }
+  .ci{ display:grid; grid-template-columns:46px 1fr; gap:16px; padding:20px 0; border-bottom:1px solid var(--hair); align-items:start; }
+  .ci:first-child{ padding-top:0; }
+  .ci .ic{ width:46px; height:46px; border:1px solid var(--ink); border-radius:50%; display:grid; place-items:center; font-size:18px; color:var(--accent); }
+  .ci .l{ font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:5px; }
+  .ci .v{ font-family:var(--serif); font-size:21px; line-height:1.15; }
+  .ci .v a:hover{ color:var(--accent); }
+  .ci .sub{ font-size:13px; color:var(--ink-soft); margin-top:3px; }
+
+  .map{ aspect-ratio:16/7; margin-top:26px; border:1px solid var(--hair); background:
+        repeating-linear-gradient(135deg, transparent, transparent 13px, oklch(0.91 0.014 72) 13px, oklch(0.91 0.014 72) 14px),
+        var(--paper-2); display:grid; place-items:center; color:oklch(0.58 0.02 60); font-size:11px; letter-spacing:.22em; text-transform:uppercase; position:relative; }
+  .map .pin{ font-family:var(--serif); font-style:italic; font-size:20px; color:var(--ink); letter-spacing:0; text-transform:none; }
+
+  @media(max-width:920px){ .c-layout{ grid-template-columns:1fr; gap:44px; } }
+  @media(max-width:560px){ .vform .two{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body data-screen-label="Contacto">
+
+  <div class="util">
+    <div class="wrap">
+      <span class="date">Los Ángeles, Biobío · Hablemos</span>
+      <div class="soc">
+        <a href="Suscríbete.html" class="search" style="border:1px solid var(--accent); color:var(--accent); border-radius:20px; padding:5px 14px;">★ Suscríbete</a>
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="Instagram">◎</a>
+        <a href="#" title="WhatsApp">✆</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="masthead">
+    <div class="wrap">
+      <a href="Home Hi-Fi.html"><div class="mark serif">Ví<em>a</em></div></a>
+      <div class="tag">Una revista con identidad local</div>
+    </div>
+  </header>
+
+  <nav class="main">
+    <div class="wrap">
+      <a href="Artículo.html">En Portada</a>
+      <a href="#">En Escena</a>
+      <a href="Sección.html">Moda</a>
+      <a href="#">Salud</a>
+      <a href="#">Historia</a>
+      <a href="#">Sociedad</a>
+      <a href="Sección.html">Vía Explora</a>
+      <a href="#">Gastronomía</a>
+      <a href="Ediciones.html">Ediciones</a>
+      <a href="Anúnciate.html" class="cta">Anúnciate</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <div class="crumbs">
+      <a href="Home Hi-Fi.html">Inicio</a><span class="sep">/</span>
+      <span>Contacto</span>
+    </div>
+
+    <div class="sec-intro">
+      <span class="kicker">Contacto</span>
+      <h1 class="serif">Hablemos</h1>
+      <p>¿Tienes una historia que contar, una consulta o una sugerencia? Escríbenos: leemos cada mensaje.</p>
+    </div>
+
+    <div class="c-layout">
+      <!-- FORM -->
+      <form class="vform" id="contactForm">
+        <div class="ok" id="okMsg">¡Gracias! Tu mensaje fue enviado. Te responderemos a la brevedad.</div>
+        <div class="two">
+          <div class="field"><label>Nombre</label><input type="text" required placeholder="Tu nombre"></div>
+          <div class="field"><label>Correo electrónico</label><input type="email" required placeholder="tucorreo@ejemplo.cl"></div>
+        </div>
+        <div class="two">
+          <div class="field"><label>Teléfono (opcional)</label><input type="tel" placeholder="+56 9 ..."></div>
+          <div class="field">
+            <label>Motivo</label>
+            <select>
+              <option>Consulta general</option>
+              <option>Sugerir una historia</option>
+              <option>Publicidad / Anúnciate</option>
+              <option>Suscripciones</option>
+              <option>Prensa y colaboraciones</option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label>Mensaje</label><textarea required placeholder="Cuéntanos en qué podemos ayudarte..."></textarea></div>
+        <button class="btn primary" type="submit">Enviar mensaje</button>
+        <div class="form-note">También puedes escribirnos directo por <a href="https://wa.me/56973353108" style="color:var(--accent); border-bottom:1px solid var(--accent);">WhatsApp</a>.</div>
+      </form>
+
+      <!-- INFO -->
+      <div>
+        <div class="c-info">
+          <div class="ci">
+            <span class="ic">✎</span>
+            <div><div class="l">Redacción</div><div class="v"><a href="#"><span class="__cf_email__" data-cfemail="debdb1b0aabfbdaab19eacbba8b7adaabfa8b7bfb2b1adbfb0b9bbb2bbadf0bdb2">[email&#160;protected]</span></a></div><div class="sub">Historias, prensa y colaboraciones</div></div>
+          </div>
+          <div class="ci">
+            <span class="ic">✆</span>
+            <div><div class="l">WhatsApp / Teléfono</div><div class="v"><a href="https://wa.me/56973353108">+56 9 7335 3108</a></div><div class="sub">Lun a Vie · 9:00 – 18:00</div></div>
+          </div>
+          <div class="ci">
+            <span class="ic">⌂</span>
+            <div><div class="l">Dónde estamos</div><div class="v">Los Ángeles, Región del Biobío</div><div class="sub">Dirección de oficina — por confirmar</div></div>
+          </div>
+          <div class="ci">
+            <span class="ic">◎</span>
+            <div><div class="l">Síguenos</div><div class="v">@revista.via.losangeles</div><div class="sub">Instagram · Facebook · WhatsApp</div></div>
+          </div>
+        </div>
+
+        <div class="map">
+          <div style="text-align:center;">
+            <div class="pin serif">◍ Los Ángeles, Chile</div>
+            <div style="margin-top:6px;">mapa interactivo (placeholder)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="top">
+        <div>
+          <div class="mark serif">Ví<em>a</em></div>
+          <div class="tag">Una revista con identidad local</div>
+          <p style="font-size:13.5px; max-width:38ch; margin:18px 0 0; color:oklch(0.78 0.014 72); line-height:1.6;">Revista mensual de Los Ángeles, Región del Biobío. Historias, gente y lugares que nos hacen comunidad.</p>
+        </div>
+        <div>
+          <h5>Secciones</h5>
+          <ul>
+            <li><a href="Artículo.html">En Portada</a></li>
+            <li><a href="Sección.html">Moda &amp; Tendencias</a></li>
+            <li><a href="#">Gastronomía</a></li>
+            <li><a href="Sección.html">Vía Explora</a></li>
+            <li><a href="#">Sociales</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Revista</h5>
+          <ul>
+            <li><a href="Suscríbete.html">Suscríbete</a></li>
+            <li><a href="Ediciones.html">Ediciones anteriores</a></li>
+            <li><a href="Anúnciate.html">Anúnciate con nosotros</a></li>
+            <li><a href="Contacto.html">Contacto</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="bottom">
+        <span>© 2026 Vía Producciones · Los Ángeles, Chile</span>
+        <div class="fsoc">
+          <a href="#" title="Facebook">f</a>
+          <a href="#" title="Instagram">◎</a>
+          <a href="#" title="WhatsApp">✆</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    document.getElementById('contactForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      var ok = document.getElementById('okMsg');
+      ok.classList.add('show');
+      this.querySelectorAll('input,select,textarea').forEach(function(el){ el.value=''; });
+      ok.scrollIntoView ? null : null;
+      window.scrollTo({ top: ok.getBoundingClientRect().top + window.scrollY - 120, behavior:'smooth' });
+    });
+  </script>
+</body>
+</html>
